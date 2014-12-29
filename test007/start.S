@@ -52,7 +52,6 @@ _start:
 // draw an array of sprites across the screen
 //
 	mov r5, #0
-outer_loop:
 	mov r4, #0
 
 inner_loop:
@@ -67,9 +66,30 @@ inner_loop:
 	cmp r4, #640-16
 	ble inner_loop
 
-	add r5, #16
-	cmp r5, #480-16
-	ble outer_loop
+	mov r5, #32
+	mov r4, #0
+
+inner_loop2:
+	mov r0, r4
+	mov r1, r5
+	bl scr_set_xy
+
+	ldr r0, =sprite32_ptr
+	bl scr_draw_sprite32
+
+	add r4, #32
+	cmp r4, #640-32
+	ble inner_loop2
+//
+// Write some text
+//
+	mov r0, #0
+	mov r1, #0
+	bl scr_set_xy
+
+	ldr r0, =msg1
+	ldr r1, msg1_len
+	bl print_str
 
 spin_loop:
 	b spin_loop

@@ -6,6 +6,8 @@
 .global scr_init_frame
 .global scr_set_colours
 .global scr_set_xy
+.global scr_plot_xy
+.global scr_plot
 .global scr_draw_char
 .global scr_draw_sprite32
 .global scr_draw_sprite16
@@ -132,7 +134,13 @@ scr_draw_char_next_bit:
 	//
 	// Store it in the screen buffer
 	//
-	str r5, [r6], #4
+	push {r0, r1, r2, r3}
+	mov r0, r5
+	mov r1, r6
+	bl scr_plot
+	pop {r0, r1, r2, r3}
+	add r6, #4
+
 scr_draw_char_bit_loop_end:
 	lsrs r3, #1
 	bne scr_draw_char_next_bit
@@ -242,7 +250,12 @@ scr_draw_sprite_next_bit32:
 	//
 	// Store it in the screen buffer
 	//
-	str r5, [r6], #4
+	push {r0, r1, r2, r3}
+	mov r0, r5
+	mov r1, r6
+	bl scr_plot
+	pop {r0, r1, r2, r3}
+	add r6, #4
 scr_draw_sprite_bit_loop_end32:
 	lsrs r3, #1
 	bne scr_draw_sprite_next_bit32
@@ -291,7 +304,12 @@ scr_draw_sprite_next_bit16:
 	//
 	// Store it in the screen buffer
 	//
-	str r5, [r6], #4
+	push {r0, r1, r2, r3}
+	mov r0, r5
+	mov r1, r6
+	bl scr_plot
+	pop {r0, r1, r2, r3}
+	add r6, #4
 scr_draw_sprite_bit_loop_end16:
 	lsrs r3, #1
 	bne scr_draw_sprite_next_bit16
@@ -304,6 +322,54 @@ scr_draw_sprite_byte_loop_end16:
 
 	pop {r4, r5, r6, r7, pc}
 
+//-------------------------------------------------------------------------------------------------
+// scr_plot_xy - display the r0 colour at the pixel coords in r1(x)  and r2(y)
+//-------------------------------------------------------------------------------------------------
+scr_plot_xy:
+	ldr r3, =SCR_FB_POINTER
+	ldr r3, [r3]						// r3 points to the screen
+	//
+	// Check we're actually in the frame buffer
+	//
+	cmp r1, #0
+	movlt pc, lr
+	cmp r1, #SCREEN_X
+	movge pc, lr
+
+	cmp r2, #0
+	movlt pc, lr
+	cmp r2, #SCREEN_Y
+	movge pc, lr
+	//
+	// Coords are OK, so calculate the offset and plot it
+	//
+	add r3, r1, lsl #2
+
+	mov r4, #SCREEN_X
+	mul r2, r4
+	add r3, r2, lsl #2
+
+	str r0, [r3]
+	mov pc, lr
+//-------------------------------------------------------------------------------------------------
+// scr_plot - display the r0 colour at the address in r1
+//-------------------------------------------------------------------------------------------------
+scr_plot:
+	ldr r3, =SCR_FB_POINTER
+	ldr r3, [r3]						// r3 points to the screen
+	//
+	// Check we're actually in the frame buffer
+	//
+	cmp r1, r3
+	movlt pc, lr
+	add r3, #4*(SCREEN_X*SCREEN_Y)
+	cmp r1, r3
+	movge pc, lr
+	//
+	// Coords are OK, so plot it
+	//
+	str r0, [r1]
+	mov pc, lr
 //-------------------------------------------------------------------------------------------------
 
 foreground: .word 0xFFFFFFFF
