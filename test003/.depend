@@ -1,0 +1,4 @@
+gert.o: gert.S
+interrupt_handler.o: interrupt_handler.S
+start.o: start.S
+util.o: util.S

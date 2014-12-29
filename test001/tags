@@ -1,0 +1,217 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ARCHITECTURE_ID	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define ARCHITECTURE_ID /;"	d	file:
+CMAKE_BINARY_DIR	scripts/Makefile	/^CMAKE_BINARY_DIR = \/Users\/twalmsley\/arm-tutorial-rpi\/test001\/scripts$/;"	m
+CMAKE_COMMAND	scripts/Makefile	/^CMAKE_COMMAND = \/opt\/local\/bin\/cmake$/;"	m
+CMAKE_SOURCE_DIR	scripts/Makefile	/^CMAKE_SOURCE_DIR = \/Users\/twalmsley\/arm-tutorial-rpi\/test001$/;"	m
+COMPILER_ID	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#   define COMPILER_ID /;"	d	file:
+COMPILER_ID	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_ID /;"	d	file:
+COMPILER_ID	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define COMPILER_ID /;"	d	file:
+COMPILER_VERSION_MAJOR	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_VERSION_MAJOR /;"	d	file:
+COMPILER_VERSION_MAJOR	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define COMPILER_VERSION_MAJOR /;"	d	file:
+COMPILER_VERSION_MINOR	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_VERSION_MINOR /;"	d	file:
+COMPILER_VERSION_MINOR	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define COMPILER_VERSION_MINOR /;"	d	file:
+COMPILER_VERSION_PATCH	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#   define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_PATCH	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_PATCH	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define COMPILER_VERSION_PATCH /;"	d	file:
+COMPILER_VERSION_TWEAK	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define COMPILER_VERSION_TWEAK /;"	d	file:
+Control	rpi-armtimer.h	/^    volatile uint32_t Control;$/;"	m	struct:__anon1
+DEC	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#define DEC(/;"	d	file:
+Disable_Basic_IRQs	rpi-interrupts.h	/^    volatile uint32_t Disable_Basic_IRQs;$/;"	m	struct:__anon3
+Disable_IRQs_1	rpi-interrupts.h	/^    volatile uint32_t Disable_IRQs_1;$/;"	m	struct:__anon3
+Disable_IRQs_2	rpi-interrupts.h	/^    volatile uint32_t Disable_IRQs_2;$/;"	m	struct:__anon3
+EQUALS	scripts/Makefile	/^EQUALS = =$/;"	m
+Enable_Basic_IRQs	rpi-interrupts.h	/^    volatile uint32_t Enable_Basic_IRQs;$/;"	m	struct:__anon3
+Enable_IRQs_1	rpi-interrupts.h	/^    volatile uint32_t Enable_IRQs_1;$/;"	m	struct:__anon3
+Enable_IRQs_2	rpi-interrupts.h	/^    volatile uint32_t Enable_IRQs_2;$/;"	m	struct:__anon3
+FIQ_control	rpi-interrupts.h	/^    volatile uint32_t FIQ_control;$/;"	m	struct:__anon3
+FreeRunningCounter	rpi-armtimer.h	/^    volatile uint32_t FreeRunningCounter;$/;"	m	struct:__anon1
+GPAFEN0	rpi-gpio.h	/^    rpi_reg_wo_t    GPAFEN0;$/;"	m	struct:__anon2
+GPAFEN1	rpi-gpio.h	/^    rpi_reg_wo_t    GPAFEN1;$/;"	m	struct:__anon2
+GPAREN0	rpi-gpio.h	/^    rpi_reg_wo_t    GPAREN0;$/;"	m	struct:__anon2
+GPAREN1	rpi-gpio.h	/^    rpi_reg_wo_t    GPAREN1;$/;"	m	struct:__anon2
+GPCLR0	rpi-gpio.h	/^    rpi_reg_wo_t    GPCLR0;$/;"	m	struct:__anon2
+GPCLR1	rpi-gpio.h	/^    rpi_reg_wo_t    GPCLR1;$/;"	m	struct:__anon2
+GPEDS0	rpi-gpio.h	/^    rpi_reg_wo_t    GPEDS0;$/;"	m	struct:__anon2
+GPEDS1	rpi-gpio.h	/^    rpi_reg_wo_t    GPEDS1;$/;"	m	struct:__anon2
+GPFEN0	rpi-gpio.h	/^    rpi_reg_wo_t    GPFEN0;$/;"	m	struct:__anon2
+GPFEN1	rpi-gpio.h	/^    rpi_reg_wo_t    GPFEN1;$/;"	m	struct:__anon2
+GPFSEL0	rpi-gpio.h	/^    rpi_reg_rw_t    GPFSEL0;$/;"	m	struct:__anon2
+GPFSEL1	rpi-gpio.h	/^    rpi_reg_rw_t    GPFSEL1;$/;"	m	struct:__anon2
+GPFSEL2	rpi-gpio.h	/^    rpi_reg_rw_t    GPFSEL2;$/;"	m	struct:__anon2
+GPFSEL3	rpi-gpio.h	/^    rpi_reg_rw_t    GPFSEL3;$/;"	m	struct:__anon2
+GPFSEL4	rpi-gpio.h	/^    rpi_reg_rw_t    GPFSEL4;$/;"	m	struct:__anon2
+GPFSEL5	rpi-gpio.h	/^    rpi_reg_rw_t    GPFSEL5;$/;"	m	struct:__anon2
+GPHEN0	rpi-gpio.h	/^    rpi_reg_wo_t    GPHEN0;$/;"	m	struct:__anon2
+GPHEN1	rpi-gpio.h	/^    rpi_reg_wo_t    GPHEN1;$/;"	m	struct:__anon2
+GPLEN0	rpi-gpio.h	/^    rpi_reg_wo_t    GPLEN0;$/;"	m	struct:__anon2
+GPLEN1	rpi-gpio.h	/^    rpi_reg_wo_t    GPLEN1;$/;"	m	struct:__anon2
+GPLEV0	rpi-gpio.h	/^    rpi_reg_wo_t    GPLEV0;$/;"	m	struct:__anon2
+GPLEV1	rpi-gpio.h	/^    rpi_reg_wo_t    GPLEV1;$/;"	m	struct:__anon2
+GPPUD	rpi-gpio.h	/^    rpi_reg_wo_t    GPPUD;$/;"	m	struct:__anon2
+GPPUDCLK0	rpi-gpio.h	/^    rpi_reg_wo_t    GPPUDCLK0;$/;"	m	struct:__anon2
+GPPUDCLK1	rpi-gpio.h	/^    rpi_reg_wo_t    GPPUDCLK1;$/;"	m	struct:__anon2
+GPREN0	rpi-gpio.h	/^    rpi_reg_wo_t    GPREN0;$/;"	m	struct:__anon2
+GPREN1	rpi-gpio.h	/^    rpi_reg_wo_t    GPREN1;$/;"	m	struct:__anon2
+GPSET0	rpi-gpio.h	/^    rpi_reg_wo_t    GPSET0;$/;"	m	struct:__anon2
+GPSET1	rpi-gpio.h	/^    rpi_reg_wo_t    GPSET1;$/;"	m	struct:__anon2
+HEX	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#define HEX(/;"	d	file:
+ID_VOID_MAIN	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define ID_VOID_MAIN$/;"	d	file:
+IRQClear	rpi-armtimer.h	/^    volatile uint32_t IRQClear;$/;"	m	struct:__anon1
+IRQ_basic_pending	rpi-interrupts.h	/^    volatile uint32_t IRQ_basic_pending;$/;"	m	struct:__anon3
+IRQ_pending_1	rpi-interrupts.h	/^    volatile uint32_t IRQ_pending_1;$/;"	m	struct:__anon3
+IRQ_pending_2	rpi-interrupts.h	/^    volatile uint32_t IRQ_pending_2;$/;"	m	struct:__anon3
+Load	rpi-armtimer.h	/^    volatile uint32_t Load;$/;"	m	struct:__anon1
+MaskedIRQ	rpi-armtimer.h	/^    volatile uint32_t MaskedIRQ;$/;"	m	struct:__anon1
+PLATFORM_ID	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^# define PLATFORM_ID /;"	d	file:
+PreDivider	rpi-armtimer.h	/^    volatile uint32_t PreDivider;$/;"	m	struct:__anon1
+RAWIRQ	rpi-armtimer.h	/^    volatile uint32_t RAWIRQ;$/;"	m	struct:__anon1
+RM	scripts/Makefile	/^RM = \/opt\/local\/bin\/cmake -E remove -f$/;"	m
+RPI_ARMTIMER_BASE	rpi-armtimer.h	/^#define RPI_ARMTIMER_BASE /;"	d
+RPI_ARMTIMER_CTRL_23BIT	rpi-armtimer.h	/^#define RPI_ARMTIMER_CTRL_23BIT /;"	d
+RPI_ARMTIMER_CTRL_DISABLE	rpi-armtimer.h	/^#define RPI_ARMTIMER_CTRL_DISABLE /;"	d
+RPI_ARMTIMER_CTRL_ENABLE	rpi-armtimer.h	/^#define RPI_ARMTIMER_CTRL_ENABLE /;"	d
+RPI_ARMTIMER_CTRL_INT_DISABLE	rpi-armtimer.h	/^#define RPI_ARMTIMER_CTRL_INT_DISABLE /;"	d
+RPI_ARMTIMER_CTRL_INT_ENABLE	rpi-armtimer.h	/^#define RPI_ARMTIMER_CTRL_INT_ENABLE /;"	d
+RPI_ARMTIMER_CTRL_PRESCALE_1	rpi-armtimer.h	/^#define RPI_ARMTIMER_CTRL_PRESCALE_1 /;"	d
+RPI_ARMTIMER_CTRL_PRESCALE_16	rpi-armtimer.h	/^#define RPI_ARMTIMER_CTRL_PRESCALE_16 /;"	d
+RPI_ARMTIMER_CTRL_PRESCALE_256	rpi-armtimer.h	/^#define RPI_ARMTIMER_CTRL_PRESCALE_256 /;"	d
+RPI_ARMTIMER_H	rpi-armtimer.h	/^#define RPI_ARMTIMER_H$/;"	d
+RPI_ArmTimerInit	rpi-armtimer.c	/^void RPI_ArmTimerInit(void)$/;"	f
+RPI_BASE_H	rpi-base.h	/^#define RPI_BASE_H$/;"	d
+RPI_BASIC_ACCESS_ERROR_0_IRQ	rpi-interrupts.h	/^#define RPI_BASIC_ACCESS_ERROR_0_IRQ /;"	d
+RPI_BASIC_ACCESS_ERROR_1_IRQ	rpi-interrupts.h	/^#define RPI_BASIC_ACCESS_ERROR_1_IRQ /;"	d
+RPI_BASIC_ARM_DOORBELL_0_IRQ	rpi-interrupts.h	/^#define RPI_BASIC_ARM_DOORBELL_0_IRQ /;"	d
+RPI_BASIC_ARM_DOORBELL_1_IRQ	rpi-interrupts.h	/^#define RPI_BASIC_ARM_DOORBELL_1_IRQ /;"	d
+RPI_BASIC_ARM_MAILBOX_IRQ	rpi-interrupts.h	/^#define RPI_BASIC_ARM_MAILBOX_IRQ /;"	d
+RPI_BASIC_ARM_TIMER_IRQ	rpi-interrupts.h	/^#define RPI_BASIC_ARM_TIMER_IRQ /;"	d
+RPI_BASIC_GPU_0_HALTED_IRQ	rpi-interrupts.h	/^#define RPI_BASIC_GPU_0_HALTED_IRQ /;"	d
+RPI_BASIC_GPU_1_HALTED_IRQ	rpi-interrupts.h	/^#define RPI_BASIC_GPU_1_HALTED_IRQ /;"	d
+RPI_GPIO_BASE	rpi-gpio.h	/^#define RPI_GPIO_BASE /;"	d
+RPI_GPIO_FSEL0_00_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_00_INPUT /;"	d
+RPI_GPIO_FSEL0_00_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_00_OUTPUT /;"	d
+RPI_GPIO_FSEL0_01_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_01_INPUT /;"	d
+RPI_GPIO_FSEL0_01_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_01_OUTPUT /;"	d
+RPI_GPIO_FSEL0_02_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_02_INPUT /;"	d
+RPI_GPIO_FSEL0_02_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_02_OUTPUT /;"	d
+RPI_GPIO_FSEL0_03_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_03_INPUT /;"	d
+RPI_GPIO_FSEL0_03_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_03_OUTPUT /;"	d
+RPI_GPIO_FSEL0_04_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_04_INPUT /;"	d
+RPI_GPIO_FSEL0_04_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_04_OUTPUT /;"	d
+RPI_GPIO_FSEL0_05_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_05_INPUT /;"	d
+RPI_GPIO_FSEL0_05_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_05_OUTPUT /;"	d
+RPI_GPIO_FSEL0_06_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_06_INPUT /;"	d
+RPI_GPIO_FSEL0_06_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_06_OUTPUT /;"	d
+RPI_GPIO_FSEL0_07_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_07_INPUT /;"	d
+RPI_GPIO_FSEL0_07_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_07_OUTPUT /;"	d
+RPI_GPIO_FSEL0_08_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_08_INPUT /;"	d
+RPI_GPIO_FSEL0_08_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_08_OUTPUT /;"	d
+RPI_GPIO_FSEL0_09_INPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_09_INPUT /;"	d
+RPI_GPIO_FSEL0_09_OUTPUT	rpi-gpio.h	/^#define RPI_GPIO_FSEL0_09_OUTPUT /;"	d
+RPI_GPIO_H	rpi-gpio.h	/^#define RPI_GPIO_H$/;"	d
+RPI_GetArmTimer	rpi-armtimer.c	/^rpi_arm_timer_t* RPI_GetArmTimer(void)$/;"	f
+RPI_GetGpio	rpi-gpio.c	/^rpi_gpio_t* RPI_GetGpio(void)$/;"	f
+RPI_GetIrqController	rpi-interrupts.c	/^rpi_irq_controller_t* RPI_GetIrqController( void )$/;"	f
+RPI_GetSystemTimer	rpi-systimer.c	/^rpi_sys_timer_t* RPI_GetSystemTimer(void)$/;"	f
+RPI_GpioInit	rpi-gpio.c	/^void RPI_GpioInit(void)$/;"	f
+RPI_INTERRUPTS_H	rpi-interrupts.h	/^#define RPI_INTERRUPTS_H$/;"	d
+RPI_INTERRUPT_CONTROLLER_BASE	rpi-interrupts.h	/^#define RPI_INTERRUPT_CONTROLLER_BASE /;"	d
+RPI_SYSTIMER_BASE	rpi-systimer.h	/^#define RPI_SYSTIMER_BASE /;"	d
+RPI_SYSTIMER_H	rpi-systimer.h	/^#define RPI_SYSTIMER_H$/;"	d
+RPI_WaitMicroSeconds	rpi-systimer.c	/^void RPI_WaitMicroSeconds( uint32_t us )$/;"	f
+Reload	rpi-armtimer.h	/^    volatile uint32_t Reload;$/;"	m	struct:__anon1
+Reserved0	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved0;$/;"	m	struct:__anon2
+Reserved1	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved1;$/;"	m	struct:__anon2
+Reserved10	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved10;$/;"	m	struct:__anon2
+Reserved11	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved11;$/;"	m	struct:__anon2
+Reserved2	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved2;$/;"	m	struct:__anon2
+Reserved3	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved3;$/;"	m	struct:__anon2
+Reserved4	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved4;$/;"	m	struct:__anon2
+Reserved5	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved5;$/;"	m	struct:__anon2
+Reserved6	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved6;$/;"	m	struct:__anon2
+Reserved7	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved7;$/;"	m	struct:__anon2
+Reserved8	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved8;$/;"	m	struct:__anon2
+Reserved9	rpi-gpio.h	/^    rpi_reg_ro_t    Reserved9;$/;"	m	struct:__anon2
+SHELL	scripts/Makefile	/^SHELL = \/bin\/sh$/;"	m
+SIMULATE_ID	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define SIMULATE_ID /;"	d	file:
+SIMULATE_VERSION_MAJOR	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define SIMULATE_VERSION_MAJOR /;"	d	file:
+SIMULATE_VERSION_MINOR	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^#  define SIMULATE_VERSION_MINOR /;"	d	file:
+SUFFIXES	scripts/Makefile	/^SUFFIXES =$/;"	m
+Value	rpi-armtimer.h	/^    volatile uint32_t Value;$/;"	m	struct:__anon1
+__env	cstubs.c	/^char *__env[1] = {0};$/;"	v
+_cstartup	cstartup.c	/^void _cstartup( unsigned int r0, unsigned int r1, unsigned int r2 )$/;"	f
+_data_abort_vector_h	start.S	/^_data_abort_vector_h:               .word   data_abort_vector$/;"	l
+_enable_interrupts	start.S	/^_enable_interrupts:$/;"	l
+_exit	cstubs.c	/^void _exit( int status )$/;"	f
+_fast_interrupt_vector_h	start.S	/^_fast_interrupt_vector_h:           .word   fast_interrupt_vector$/;"	l
+_get_stack_pointer	start.S	/^_get_stack_pointer:$/;"	l
+_inf_loop	start.S	/^_inf_loop:$/;"	l
+_interrupt_vector_h	start.S	/^_interrupt_vector_h:                .word   interrupt_vector$/;"	l
+_prefetch_abort_vector_h	start.S	/^_prefetch_abort_vector_h:           .word   prefetch_abort_vector$/;"	l
+_reset_	start.S	/^_reset_:$/;"	l
+_reset_h	start.S	/^_reset_h:                           .word   _reset_$/;"	l
+_sbrk	cstubs.c	/^caddr_t _sbrk( int incr )$/;"	f
+_software_interrupt_vector_h	start.S	/^_software_interrupt_vector_h:       .word   software_interrupt_vector$/;"	l
+_start	start.S	/^_start:$/;"	l
+_undefined_instruction_vector_h	start.S	/^_undefined_instruction_vector_h:    .word   undefined_instruction_vector$/;"	l
+_unused_handler_h	start.S	/^_unused_handler_h:                  .word   _reset_$/;"	l
+close	cstubs.c	/^int close( int file )$/;"	f
+compare0	rpi-systimer.h	/^    volatile uint32_t compare0;$/;"	m	struct:__anon4
+compare1	rpi-systimer.h	/^    volatile uint32_t compare1;$/;"	m	struct:__anon4
+compare2	rpi-systimer.h	/^    volatile uint32_t compare2;$/;"	m	struct:__anon4
+compare3	rpi-systimer.h	/^    volatile uint32_t compare3;$/;"	m	struct:__anon4
+control_status	rpi-systimer.h	/^    volatile uint32_t control_status;$/;"	m	struct:__anon4
+counter_hi	rpi-systimer.h	/^    volatile uint32_t counter_hi;$/;"	m	struct:__anon4
+counter_lo	rpi-systimer.h	/^    volatile uint32_t counter_lo;$/;"	m	struct:__anon4
+data_abort_vector	rpi-interrupts.c	/^void __attribute__((interrupt("ABORT"))) data_abort_vector(void)$/;"	f
+environ	cstubs.c	/^char **environ = __env;$/;"	v
+errno	cstubs.c	/^#undef errno$/;"	d	file:
+execve	cstubs.c	/^int execve( char *name, char **argv, char **env )$/;"	f
+fast_interrupt_vector	rpi-interrupts.c	/^void __attribute__((interrupt("FIQ"))) fast_interrupt_vector(void)$/;"	f
+fork	cstubs.c	/^int fork( void )$/;"	f
+fstat	cstubs.c	/^int fstat( int file, struct stat *st )$/;"	f
+getpid	cstubs.c	/^int getpid( void )$/;"	f
+info_arch	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";$/;"	v
+info_compiler	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";$/;"	v
+info_platform	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";$/;"	v
+info_simulate	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* info_simulate = "INFO" ":" "simulate[" SIMULATE_ID "]";$/;"	v
+info_simulate_version	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const info_simulate_version[] = {$/;"	v
+info_version	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const info_version[] = {$/;"	v
+interrupt_vector	rpi-interrupts.c	/^void __attribute__((interrupt("IRQ"))) interrupt_vector(void)$/;"	f
+isatty	cstubs.c	/^int isatty(int file)$/;"	f
+kernel_main	test-001.c	/^void kernel_main( unsigned int r0, unsigned int r1, unsigned int atags )$/;"	f
+kill	cstubs.c	/^int kill( int pid, int sig )$/;"	f
+link	cstubs.c	/^int link( char *old, char *new )$/;"	f
+lseek	cstubs.c	/^int lseek(int file, int ptr, int dir)$/;"	f
+main	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^int main(int argc, char* argv[])$/;"	f
+main	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^void main() {}$/;"	f
+open	cstubs.c	/^int open( const char *name, int flags, int mode )$/;"	f
+outbyte	cstubs.c	/^void outbyte( char b )$/;"	f
+prefetch_abort_vector	rpi-interrupts.c	/^void __attribute__((interrupt("ABORT"))) prefetch_abort_vector(void)$/;"	f
+qnxnto	scripts/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c	/^char const* qnxnto = "INFO" ":" "qnxnto";$/;"	v
+read	cstubs.c	/^int read( int file, char *ptr, int len )$/;"	f
+reset_vector	rpi-interrupts.c	/^void __attribute__((interrupt("ABORT"))) reset_vector(void)$/;"	f
+rpiArmTimer	rpi-armtimer.c	/^static rpi_arm_timer_t* rpiArmTimer = (rpi_arm_timer_t*)RPI_ARMTIMER_BASE;$/;"	v	file:
+rpiGpio	rpi-gpio.c	/^static rpi_gpio_t* rpiGpio = (rpi_gpio_t*)RPI_GPIO_BASE;$/;"	v	file:
+rpiIRQController	rpi-interrupts.c	/^static rpi_irq_controller_t* rpiIRQController =$/;"	v	file:
+rpiSystemTimer	rpi-systimer.c	/^static rpi_sys_timer_t* rpiSystemTimer = (rpi_sys_timer_t*)RPI_SYSTIMER_BASE;$/;"	v	file:
+rpi_arm_timer_t	rpi-armtimer.h	/^    } rpi_arm_timer_t;$/;"	t	typeref:struct:__anon1
+rpi_gpio_t	rpi-gpio.h	/^} rpi_gpio_t;$/;"	t	typeref:struct:__anon2
+rpi_irq_controller_t	rpi-interrupts.h	/^    } rpi_irq_controller_t;$/;"	t	typeref:struct:__anon3
+rpi_reg_ro_t	rpi-base.h	/^typedef volatile const uint32_t rpi_reg_ro_t;$/;"	t
+rpi_reg_rw_t	rpi-base.h	/^typedef volatile uint32_t rpi_reg_rw_t;$/;"	t
+rpi_reg_wo_t	rpi-base.h	/^typedef volatile uint32_t rpi_reg_wo_t;$/;"	t
+rpi_sys_timer_t	rpi-systimer.h	/^    } rpi_sys_timer_t;$/;"	t	typeref:struct:__anon4
+rpi_wreg_ro_t	rpi-base.h	/^typedef volatile const uint64_t rpi_wreg_ro_t;$/;"	t
+rpi_wreg_rw_t	rpi-base.h	/^typedef volatile uint64_t rpi_wreg_rw_t;$/;"	t
+software_interrupt_vector	rpi-interrupts.c	/^void __attribute__((interrupt("SWI"))) software_interrupt_vector(void)$/;"	f
+stat	cstubs.c	/^int stat( const char *file, struct stat *st )$/;"	f
+times	cstubs.c	/^clock_t times( struct tms *buf )$/;"	f
+undefined_instruction_vector	rpi-interrupts.c	/^void __attribute__((interrupt("UNDEF"))) undefined_instruction_vector(void)$/;"	f
+unlink	cstubs.c	/^int unlink( char *name )$/;"	f
+wait	cstubs.c	/^int wait( int *status )$/;"	f
+write	cstubs.c	/^int write( int file, char *ptr, int len )$/;"	f

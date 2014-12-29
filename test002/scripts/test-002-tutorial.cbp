@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="test-002-tutorial" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="edit_cache">
+         <Option working_dir="/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="test-002">
+         <Option output="/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/test-002" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/opt/local/lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include" />
+            <Add directory="/opt/local/lib/gcc/arm-none-eabi/4.7.3/include" />
+            <Add directory="/opt/local/lib/gcc/arm-none-eabi/4.7.3/include-fixed" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 test-002" />
+            <CompileFile command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="test-002/fast">
+         <Option output="/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/test-002" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/opt/local/lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/include" />
+            <Add directory="/opt/local/lib/gcc/arm-none-eabi/4.7.3/include" />
+            <Add directory="/opt/local/lib/gcc/arm-none-eabi/4.7.3/include-fixed" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 test-002/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/Users/twalmsley/git/arm-tutorial-rpi/test002/scripts/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/Users/twalmsley/git/arm-tutorial-rpi/test002/cstartup.c">
+      </Unit>
+      <Unit filename="/Users/twalmsley/git/arm-tutorial-rpi/test002/gert.S">
+      </Unit>
+      <Unit filename="/Users/twalmsley/git/arm-tutorial-rpi/test002/interrupt_handler.S">
+      </Unit>
+      <Unit filename="/Users/twalmsley/git/arm-tutorial-rpi/test002/start.S">
+      </Unit>
+      <Unit filename="/Users/twalmsley/git/arm-tutorial-rpi/test002/util.S">
+      </Unit>
+      <Unit filename="/Users/twalmsley/git/arm-tutorial-rpi/test002/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+      <Unit filename="/Users/twalmsley/git/arm-tutorial-rpi/test002/toolchain-arm-none-eabi.cmake">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>

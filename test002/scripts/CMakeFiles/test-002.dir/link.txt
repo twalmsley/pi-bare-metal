@@ -1,0 +1,1 @@
+/opt/local/bin/arm-none-eabi-gcc  -O2 -mfpu=vfp -mfloat-abi=hard -march=armv6zk -mtune=arm1176jzf-s -nostartfiles  -Wl,-T,/Users/twalmsley/git/arm-tutorial-rpi/test002/rpi.x CMakeFiles/test-002.dir/cstartup.c.obj CMakeFiles/test-002.dir/start.S.obj CMakeFiles/test-002.dir/gert.S.obj CMakeFiles/test-002.dir/util.S.obj CMakeFiles/test-002.dir/interrupt_handler.S.obj  -o test-002  
