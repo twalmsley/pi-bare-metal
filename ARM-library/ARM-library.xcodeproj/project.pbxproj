@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		4A29444E1A50667F0084C298 /* conio.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = conio.S; sourceTree = "<group>"; };
+		4AC4094C1A51BCA0009499A5 /* gfx.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = gfx.S; sourceTree = "<group>"; };
 		4AF3E3B91A50295F0042E342 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		4AF3E3BA1A50295F0042E342 /* heap.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = heap.S; sourceTree = "<group>"; };
 		4AF3E3BB1A50295F0042E342 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -22,6 +23,7 @@
 			children = (
 				4A29444E1A50667F0084C298 /* conio.S */,
 				4AF3E3BF1A503A3C0042E342 /* video.S */,
+				4AC4094C1A51BCA0009499A5 /* gfx.S */,
 				4AF3E3BD1A502E300042E342 /* gert.S */,
 				4AF3E3BE1A502E300042E342 /* util.S */,
 				4AF3E3B91A50295F0042E342 /* constants.h */,

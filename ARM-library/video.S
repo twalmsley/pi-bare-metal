@@ -11,6 +11,8 @@
 .global scr_draw_char
 .global scr_draw_sprite32
 .global scr_draw_sprite16
+.global scr_get_xy
+.global scr_get_foreground
 .global SCR_FB_POINTER
 
 // Setup Frame Buffer
@@ -49,8 +51,6 @@ scr_init_frame:
 
     ldr r0,=SCR_FB_POINTER // R0 = Frame Buffer Pointer
     ldr r0, [r0]
-    tst r0,r0 // Compare Frame Buffer Pointer to Zero
-    popeq {pc} // IF Zero Re-Initialize Frame Buffer
 
     mov r1, #(SCREEN_Y*SCREEN_X)
 init_frame_loop:
@@ -326,20 +326,21 @@ scr_draw_sprite_byte_loop_end16:
 // scr_plot_xy - display the r0 colour at the pixel coords in r1(x)  and r2(y)
 //-------------------------------------------------------------------------------------------------
 scr_plot_xy:
+	push {r4, lr}
 	ldr r3, =SCR_FB_POINTER
 	ldr r3, [r3]						// r3 points to the screen
 	//
 	// Check we're actually in the frame buffer
 	//
 	cmp r1, #0
-	movlt pc, lr
+	poplt {r4, pc}
 	cmp r1, #SCREEN_X
-	movge pc, lr
+	popge {r4, pc}
 
 	cmp r2, #0
-	movlt pc, lr
+	poplt {r4, pc}
 	cmp r2, #SCREEN_Y
-	movge pc, lr
+	popge {r4, pc}
 	//
 	// Coords are OK, so calculate the offset and plot it
 	//
@@ -350,7 +351,7 @@ scr_plot_xy:
 	add r3, r2, lsl #2
 
 	str r0, [r3]
-	mov pc, lr
+	pop {r4, pc}
 //-------------------------------------------------------------------------------------------------
 // scr_plot - display the r0 colour at the address in r1
 //-------------------------------------------------------------------------------------------------
@@ -369,6 +370,19 @@ scr_plot:
 	// Coords are OK, so plot it
 	//
 	str r0, [r1]
+	mov pc, lr
+//-------------------------------------------------------------------------------------------------
+// Get the current xy coords
+//-------------------------------------------------------------------------------------------------
+scr_get_xy:
+	ldr r0, scr_draw_x
+	ldr r1, scr_draw_y
+	mov pc, lr
+//-------------------------------------------------------------------------------------------------
+// Get the current foreground colour
+//-------------------------------------------------------------------------------------------------
+scr_get_foreground:
+	ldr r0, foreground
 	mov pc, lr
 //-------------------------------------------------------------------------------------------------
 
