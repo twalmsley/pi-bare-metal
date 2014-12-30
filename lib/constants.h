@@ -64,3 +64,7 @@
 .equ    RPI_GPCLR1,                       0x2C
 .equ    RPI_GPLEV0,                       0x34
 .equ    RPI_GPLEV1,                       0x38
+// Setup Frame Buffer constants
+.equ SCREEN_X,       640
+.equ SCREEN_Y,       480
+.equ BITS_PER_PIXEL, 32

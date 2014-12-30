@@ -7,8 +7,55 @@
 //
 .section ".text"
 
-.global gfx_rect
+.include "constants.h"
 
+.global gfx_rect
+.global gfx_fill_rect
+
+//-------------------------------------------------------------------------------------------
+// gfx_fill_rect - draw a filled rectangle at the current coords of size x=r0, y=r1
+//-------------------------------------------------------------------------------------------
+gfx_fill_rect:
+	push {r4-r8, lr}
+	sub sp, #12
+	//
+	// sp[0] = x-dimension
+	// sp[4] = y-dimension
+	// sp[8] = foreground colour
+	//
+	str r0, [sp]
+	str r1, [sp, #4]
+	//
+	// Get and store the foreground colour
+	//
+	bl scr_get_foreground
+	str r0, [sp, #8]
+	//
+	// Get a pointer to the pixel at XY
+	//
+	bl scr_get_xy_ptr
+	mov r1, r0 // Save frame buffer pointer to XY pixel
+
+	ldr r0, [sp, #8]	//Foreground colour
+	ldr r5, [sp, #4]	//y-dimension counter
+	ldr r4, [sp]		//x-dimension counter
+
+gfx_fill_rect_loop:
+	bl scr_plot
+
+	add r1, #4
+	subs r4, #1
+	bne gfx_fill_rect_loop
+
+	add r1, #SCREEN_X*4
+	ldr r4, [sp]		//x-dimension counter
+	sub r1, r4, lsl #2
+
+	subs r5, #1
+	bne gfx_fill_rect_loop
+
+	add sp, #12
+	pop {r4-r8, pc}
 //-------------------------------------------------------------------------------------------
 // gfx_rect - draw a rectangle at the current coords of size x=r0, y=r1
 //-------------------------------------------------------------------------------------------
@@ -41,7 +88,7 @@ gfx_rect_x_loop:
 
 	add r1, #1
 	subs r3, #1
-	bge gfx_rect_x_loop
+	bne gfx_rect_x_loop
 
 	mov r1, r5	// reload the x coord
 gfx_rect_y_loop:
@@ -57,6 +104,6 @@ gfx_rect_y_loop:
 
 	add r2, #1
 	subs r4, #1
-	bge gfx_rect_y_loop
+	bne gfx_rect_y_loop
 
 	pop {r4-r8, pc}

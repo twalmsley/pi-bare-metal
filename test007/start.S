@@ -13,6 +13,7 @@
 .extern scr_draw_sprite32
 .extern scr_draw_sprite16
 .extern gfx_rect
+.extern gfx_fill_rect
 
 .arm
 
@@ -126,7 +127,7 @@ inner_loop2:
 
 	mov r0, #640-200
 	mov r1, #480-200
-	bl gfx_rect// gfx_rect - draw a rectangle at the current coords of size x=r0, y=r1
+	bl gfx_fill_rect// gfx_fill_rect - fill a rectangle at the current coords of size x=r0, y=r1
 spin_loop:
 	b spin_loop
 

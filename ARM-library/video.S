@@ -12,13 +12,9 @@
 .global scr_draw_sprite32
 .global scr_draw_sprite16
 .global scr_get_xy
+.global scr_get_xy_ptr
 .global scr_get_foreground
 .global SCR_FB_POINTER
-
-// Setup Frame Buffer
-.equ SCREEN_X,       640
-.equ SCREEN_Y,       480
-.equ BITS_PER_PIXEL, 32
 
 //-------------------------------------------------------------------------------------------------
 // Init frame buffer structure
@@ -330,19 +326,7 @@ scr_plot_xy:
 	ldr r3, =SCR_FB_POINTER
 	ldr r3, [r3]						// r3 points to the screen
 	//
-	// Check we're actually in the frame buffer
-	//
-	cmp r1, #0
-	poplt {r4, pc}
-	cmp r1, #SCREEN_X
-	popge {r4, pc}
-
-	cmp r2, #0
-	poplt {r4, pc}
-	cmp r2, #SCREEN_Y
-	popge {r4, pc}
-	//
-	// Coords are OK, so calculate the offset and plot it
+	// Calculate the offset and plot it
 	//
 	add r3, r1, lsl #2
 
@@ -350,7 +334,9 @@ scr_plot_xy:
 	mul r2, r4
 	add r3, r2, lsl #2
 
-	str r0, [r3]
+	mov r1, r3
+	bl scr_plot
+
 	pop {r4, pc}
 //-------------------------------------------------------------------------------------------------
 // scr_plot - display the r0 colour at the address in r1
@@ -377,6 +363,22 @@ scr_plot:
 scr_get_xy:
 	ldr r0, scr_draw_x
 	ldr r1, scr_draw_y
+	mov pc, lr
+
+//-------------------------------------------------------------------------------------------------
+// Get pointer to the current xy pixel
+//-------------------------------------------------------------------------------------------------
+scr_get_xy_ptr:
+	ldr r0, =SCR_FB_POINTER
+	ldr r0, [r0]						// r0 points to the screen
+
+	ldr r1,scr_draw_x
+	add r0, r1, lsl #2
+
+	ldr r1, scr_draw_y
+	mov r2, #SCREEN_X
+	mul r1, r2
+	add r0, r1, lsl #2
 	mov pc, lr
 //-------------------------------------------------------------------------------------------------
 // Get the current foreground colour
