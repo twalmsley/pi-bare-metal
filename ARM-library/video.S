@@ -179,6 +179,7 @@ scr_new_line:
 // scr_scroll - move the screen up one line (8 pixel rows)
 //-------------------------------------------------------------------------------------------------
 scr_scroll:
+	push {lr}
 	//
 	// Get a pointer to the start of the screen
 	//
@@ -195,22 +196,19 @@ scr_scroll:
 	mov r2, #(SCREEN_X*SCREEN_Y)
 	sub r2, #(SCREEN_X*8)
 
-scr_scroll_loop:
-	ldr r3, [r1], #4
-	str r3, [r0], #4
-	subs r2, #1
-	bne scr_scroll_loop
+	bl util_block_transfer
 	//
 	// Clear the bottom 8 rows to the background colour
 	//
 	mov r2, #(SCREEN_X*8)
 	ldr r3, background
+
 scr_scroll_loop2:
 	str r3, [r0], #4
 	subs r2, #1
 	bne scr_scroll_loop2
 
-	mov pc, lr
+	pop {pc}
 //-------------------------------------------------------------------------------------------------
 // Draw a 32x32 sprite pointed to by r0
 //-------------------------------------------------------------------------------------------------
@@ -391,9 +389,10 @@ scr_get_foreground:
 // Add a callback to flash the cursor
 //-------------------------------------------------------------------------------------------------
 scr_enable_cursor:
+	push {lr}
 	ldr r0, =scr_cursor_callback
 	bl int_set_callback1
-	mov pc, lr
+	pop {pc}
 //-------------------------------------------------------------------------------------------------
 // Callback function used to flash the cursor
 //-------------------------------------------------------------------------------------------------

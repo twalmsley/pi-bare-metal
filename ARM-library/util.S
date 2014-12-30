@@ -3,6 +3,7 @@
 .global util_r0_delay
 .global pseud_rand
 .global pseud_rand_seeds
+.global util_block_transfer
 
 //------------------------------------------------------------------
 // Counts down until r0 is 0
@@ -53,3 +54,35 @@ pseud_rand:
 	str r3, PRNG_W
 	mov r0, r3
 	pop {r4, r5, pc}
+//------------------------------------------------------------------
+// Block transfer words - r0 = dest, r1 = src, r2=nwords
+//
+// transfers 8 words at a time. dest < src or if not then the areas
+// must not overlap otherwise the src will be corrupted before copy
+//------------------------------------------------------------------
+util_block_transfer:
+	push {r4-r12, lr}
+
+	mov r4, r2
+	movs r3, r2, lsr #3	// r3 is the number of 8 word blocks to move
+
+	beq util_block_remainder	// Skip if zero
+	
+util_block_loop1:
+	ldm r1!, {r5-r12}
+	stm r0!, {r5-r12}
+	subs r3, #1
+	bne util_block_loop1
+
+util_block_remainder:
+	ands r4, #7			// r4 is the remaining number of words
+	beq util_block_exit	// Skip if zero
+
+util_block_loop2:
+	ldr r5, [r1], #4
+	str r5, [r0], #4
+	subs r4, #1
+	bne util_block_loop2
+util_block_exit:
+	pop {r4-r12, pc}
+//------------------------------------------------------------------

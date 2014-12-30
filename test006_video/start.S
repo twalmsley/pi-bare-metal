@@ -11,6 +11,7 @@
 .extern scr_set_colours
 .extern SCR_FB_POINTER
 .extern pseud_rand
+.extern pseud_rand_seeds
 
 .arm
 
@@ -49,6 +50,11 @@ _start:
 	bl scr_set_colours
     bl scr_init_frame
 
+	mov r0, #0x000000AA
+	mov r1, #0x0000AA00
+	mov r2, #0x00AA0000
+	mov r3, #0xAA000000
+	bl pseud_rand_seeds
     bl seed_life
 
 next_frame:
@@ -92,25 +98,13 @@ seed_loop:
 //-------------------------------------------------------------------------------------------------
 update_frame_buffer:
     push {r4, r5, lr}
-    ldr r3, foreground
-    ldr r5, background
 
-    orr r3, #0xFF000000
-    orr r5, #0xFF000000
-
-    ldr r0,life_buffer_ptr // R0 = Life Buffer Pointer
-    ldr r1,=SCR_FB_POINTER // R0 = Frame Buffer Pointer
-    ldr r1, [r1]
-
+    ldr r0,=SCR_FB_POINTER // R0 = Frame Buffer Pointer
+    ldr r0, [r0]
+    ldr r1,life_buffer_ptr // R0 = Life Buffer Pointer
     mov r2, #(SCREEN_X * SCREEN_Y)
 
-update_loop:
-
-    ldr r4, [r0], #4
-    str r4, [r1], #4
-
-    subs r2, #1
-    bne update_loop
+	bl util_block_transfer
     //
     // Return
     //
