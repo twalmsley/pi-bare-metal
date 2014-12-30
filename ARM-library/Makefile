@@ -7,7 +7,8 @@ FILES = heap.S \
 	util.S \
 	video.S \
 	conio.S \
-	gfx.S
+	gfx.S \
+	interrupt_handler.S
 
 OBJ = $(FILES:.S=.o)
 OUT = ../lib/libaosd_asm.a

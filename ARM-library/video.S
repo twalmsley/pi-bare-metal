@@ -14,6 +14,7 @@
 .global scr_get_xy
 .global scr_get_xy_ptr
 .global scr_get_foreground
+.global scr_enable_cursor
 .global SCR_FB_POINTER
 
 //-------------------------------------------------------------------------------------------------
@@ -387,7 +388,56 @@ scr_get_foreground:
 	ldr r0, foreground
 	mov pc, lr
 //-------------------------------------------------------------------------------------------------
+// Add a callback to flash the cursor
+//-------------------------------------------------------------------------------------------------
+scr_enable_cursor:
+	ldr r0, =scr_cursor_callback
+	bl int_set_callback1
+	mov pc, lr
+//-------------------------------------------------------------------------------------------------
+// Callback function used to flash the cursor
+//-------------------------------------------------------------------------------------------------
+scr_cursor_callback:
+	push {r4-r6, lr}
 
+	ldr r4, scr_cursor_blink_count
+	add r4, #1
+	cmp r4, #976/2 // About 0.5 secs
+	bne scr_cursor_callback_exit
+	//
+	// Reset the counter and toggle the cursor
+	//
+	mov r4, #0
+	ldr r5, scr_cursor_blink_onoff
+	tst r5, r5
+	moveq r5, #1
+	movne r5, #0
+	str r5, scr_cursor_blink_onoff
+	//
+	// convert the value in r5 to a foreground or background colour as necessary
+	//
+	teq r5, #1
+	ldreq r5, foreground
+	ldrne r5, background
+
+	bl scr_get_xy_ptr	// in r0
+	add r0, #(4*7*SCREEN_X)
+
+	mov r6, #8	// 8-pixel underscore
+scr_cursor_loop:
+	str r5, [r0], #4
+	subs r6, #1
+	bne scr_cursor_loop
+
+scr_cursor_callback_exit:
+	str r4, scr_cursor_blink_count
+	pop {r4-r6, pc}
+
+scr_cursor_blink_count:
+	.word 0x0
+scr_cursor_blink_onoff:
+	.word 0x0	// 0 = 0ff, 1 = on
+//-------------------------------------------------------------------------------------------------
 foreground: .word 0xFFFFFFFF
 background: .word 0xFF000000
 
@@ -424,7 +474,13 @@ scr_font:
 	.byte 0x78, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x00	// 7
 	.byte 0x38, 0x44, 0x44, 0x38, 0x44, 0x44, 0x38, 0x00	// 8
 	.byte 0x38, 0x44, 0x44, 0x3C, 0x04, 0x44, 0x38, 0x00	// 9
-.space (8*7) // leave space for punctuation
+	.byte 0x00, 0x18, 0x18, 0x00, 0x18, 0x18, 0x00, 0x00	// :
+	.byte 0x00, 0x18, 0x18, 0x00, 0x18, 0x18, 0x30, 0x00	// ;
+	.byte 0x06, 0x18, 0x60, 0x80, 0x60, 0x18, 0x06, 0x00	// <
+	.byte 0x00, 0x00, 0x7e, 0x00, 0x00, 0x7e, 0x00, 0x00	// =
+	.byte 0xc0, 0x30, 0x0c, 0x02, 0x0c, 0x30, 0xc0, 0x00	// >
+	.byte 0x38, 0x44, 0x04, 0x18, 0x10, 0x00, 0x10, 0x00	// ?
+	.byte 0x3c, 0x42, 0x9e, 0xa2, 0x9e, 0x40, 0x3e, 0x00	// @
 	.byte 0x30, 0x48, 0x84, 0x84, 0xFC, 0x84, 0x84, 0x00	// A
 	.byte 0x78, 0x44, 0x44, 0x78, 0x44, 0x44, 0x78, 0x00	// B
 	.byte 0x38, 0x44, 0x40, 0x40, 0x40, 0x44, 0x38, 0x00	// C

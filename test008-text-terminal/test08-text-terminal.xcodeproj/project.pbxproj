@@ -7,81 +7,71 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		4A29444E1A50667F0084C298 /* conio.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = conio.S; sourceTree = "<group>"; };
-		4AA695B31A52C59D00107230 /* interrupt_handler.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = interrupt_handler.S; sourceTree = "<group>"; };
-		4AC4094C1A51BCA0009499A5 /* gfx.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = gfx.S; sourceTree = "<group>"; };
-		4AF3E3B91A50295F0042E342 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
-		4AF3E3BA1A50295F0042E342 /* heap.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = heap.S; sourceTree = "<group>"; };
-		4AF3E3BB1A50295F0042E342 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		4AF3E3BD1A502E300042E342 /* gert.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = gert.S; sourceTree = "<group>"; };
-		4AF3E3BE1A502E300042E342 /* util.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = util.S; sourceTree = "<group>"; };
-		4AF3E3BF1A503A3C0042E342 /* video.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = video.S; sourceTree = "<group>"; };
+		4A38D6181A52BE5000024F1F /* cstartup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cstartup.c; sourceTree = "<group>"; };
+		4A38D6191A52BE5000024F1F /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		4A38D61A1A52BE5000024F1F /* rpi.x */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rpi.x; sourceTree = "<group>"; };
+		4A38D61B1A52BE5000024F1F /* start.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = start.S; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		4AF3E3AE1A5029290042E342 = {
+		4A38D60D1A52BE3500024F1F = {
 			isa = PBXGroup;
 			children = (
-				4AA695B31A52C59D00107230 /* interrupt_handler.S */,
-				4A29444E1A50667F0084C298 /* conio.S */,
-				4AF3E3BF1A503A3C0042E342 /* video.S */,
-				4AC4094C1A51BCA0009499A5 /* gfx.S */,
-				4AF3E3BD1A502E300042E342 /* gert.S */,
-				4AF3E3BE1A502E300042E342 /* util.S */,
-				4AF3E3B91A50295F0042E342 /* constants.h */,
-				4AF3E3BA1A50295F0042E342 /* heap.S */,
-				4AF3E3BB1A50295F0042E342 /* Makefile */,
+				4A38D6181A52BE5000024F1F /* cstartup.c */,
+				4A38D6191A52BE5000024F1F /* Makefile */,
+				4A38D61A1A52BE5000024F1F /* rpi.x */,
+				4A38D61B1A52BE5000024F1F /* start.S */,
 			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
-		4AF3E3B31A5029290042E342 /* ARM-library */ = {
+		4A38D6121A52BE3500024F1F /* test08-text-terminal */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 4AF3E3B61A5029290042E342 /* Build configuration list for PBXLegacyTarget "ARM-library" */;
+			buildConfigurationList = 4A38D6151A52BE3500024F1F /* Build configuration list for PBXLegacyTarget "test08-text-terminal" */;
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
 			dependencies = (
 			);
-			name = "ARM-library";
+			name = "test08-text-terminal";
 			passBuildSettingsInEnvironment = 1;
-			productName = "ARM-library";
+			productName = "test08-text-terminal";
 		};
 /* End PBXLegacyTarget section */
 
 /* Begin PBXProject section */
-		4AF3E3AF1A5029290042E342 /* Project object */ = {
+		4A38D60E1A52BE3500024F1F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Tony Walmsley";
 				TargetAttributes = {
-					4AF3E3B31A5029290042E342 = {
+					4A38D6121A52BE3500024F1F = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
 			};
-			buildConfigurationList = 4AF3E3B21A5029290042E342 /* Build configuration list for PBXProject "ARM-library" */;
+			buildConfigurationList = 4A38D6111A52BE3500024F1F /* Build configuration list for PBXProject "test08-text-terminal" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 4AF3E3AE1A5029290042E342;
+			mainGroup = 4A38D60D1A52BE3500024F1F;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4AF3E3B31A5029290042E342 /* ARM-library */,
+				4A38D6121A52BE3500024F1F /* test08-text-terminal */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin XCBuildConfiguration section */
-		4AF3E3B41A5029290042E342 /* Debug */ = {
+		4A38D6131A52BE3500024F1F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -121,7 +111,7 @@
 			};
 			name = Debug;
 		};
-		4AF3E3B51A5029290042E342 /* Release */ = {
+		4A38D6141A52BE3500024F1F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -155,7 +145,7 @@
 			};
 			name = Release;
 		};
-		4AF3E3B71A5029290042E342 /* Debug */ = {
+		4A38D6161A52BE3500024F1F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUGGING_SYMBOLS = YES;
@@ -167,7 +157,7 @@
 			};
 			name = Debug;
 		};
-		4AF3E3B81A5029290042E342 /* Release */ = {
+		4A38D6171A52BE3500024F1F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				OTHER_CFLAGS = "";
@@ -179,25 +169,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4AF3E3B21A5029290042E342 /* Build configuration list for PBXProject "ARM-library" */ = {
+		4A38D6111A52BE3500024F1F /* Build configuration list for PBXProject "test08-text-terminal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4AF3E3B41A5029290042E342 /* Debug */,
-				4AF3E3B51A5029290042E342 /* Release */,
+				4A38D6131A52BE3500024F1F /* Debug */,
+				4A38D6141A52BE3500024F1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4AF3E3B61A5029290042E342 /* Build configuration list for PBXLegacyTarget "ARM-library" */ = {
+		4A38D6151A52BE3500024F1F /* Build configuration list for PBXLegacyTarget "test08-text-terminal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4AF3E3B71A5029290042E342 /* Debug */,
-				4AF3E3B81A5029290042E342 /* Release */,
+				4A38D6161A52BE3500024F1F /* Debug */,
+				4A38D6171A52BE3500024F1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 4AF3E3AF1A5029290042E342 /* Project object */;
+	rootObject = 4A38D60E1A52BE3500024F1F /* Project object */;
 }
