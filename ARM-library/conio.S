@@ -10,7 +10,9 @@
 .include "constants.h"
 
 .global print_str
+.global print_char
 .global print_int
+.global print_hex
 
 //--------------------------------------------------------------------------------------
 // print_str
@@ -30,7 +32,36 @@ print_str_loop:
 
 	pop {pc}
 //--------------------------------------------------------------------------------------
+// print_char
+// r0 = ascii character
+//--------------------------------------------------------------------------------------
+print_char:
+	push {lr}
+	bl scr_draw_char_in_r0
+	pop {pc}
+//--------------------------------------------------------------------------------------
+// Print a hex word - word is in r0
+//--------------------------------------------------------------------------------------
+print_hex:
+	push {r4-r6, lr}
 
+	ldr r4, =conio_hex_digits	// Pointer to the hex digit table
+	mov r5, #28					// Shift amount
+	mov r6, r0					// Save the original param value
+
+print_hex_digit_loop:
+	mov r0, r6
+	lsr r0, r5					// Shift the required nibble to the LSbits
+
+	and r0, #0xF				// Mask the nibble
+	ldrb r0, [r4, r0]			// Get the hex digit
+	and r0, #0xFF				// Just in case
+
+	bl scr_draw_char_in_r0		// Draw the digit
+	subs r5, #4					// Adjust the shift amount
+	bge print_hex_digit_loop
+
+	pop {r4-r6, pc}
 //--------------------------------------------------------------------------------------
 // print_int
 // r0 = integer value to print
@@ -120,3 +151,6 @@ conio_powers_of_10:
 	.word 100
 	.word 10
 	.word 1
+conio_hex_digits:
+	.string "0123456789ABCDEF"
+.align

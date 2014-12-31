@@ -68,3 +68,32 @@
 .equ SCREEN_X,       640
 .equ SCREEN_Y,       480
 .equ BITS_PER_PIXEL, 32
+// UART Constants
+.equ UART_DR,						0x00
+.equ UART_RSRECR,					0x04
+.equ UART_FR,						0x18
+.equ UART_IBRD,						0x24
+.equ UART_FBRD,						0x28
+.equ UART_LCRH,						0x2c
+.equ UART_CR,						0x30
+.equ UART_IFLS,						0x34
+.equ UART_IMSC,						0x38
+.equ UART_RIS,						0x3c
+.equ UART_MIS,						0x40
+.equ UART_ICR,						0x44
+.equ UART_DMACR,					0x48
+.equ UART_CLOCK,					300000000
+
+.equ UART_LCRH_BRK,					0x00
+.equ UART_LCRH_PEN,					0x01
+.equ UART_LCRH_EPS,					0x02
+.equ UART_LCRH_STP2,				0x03
+.equ UART_LCRH_FEN,					0x04
+.equ UART_LCRH_WLEN,				0x05
+
+.equ UART_CR_UARTEN,				0x00
+.equ UART_CR_TXE,					0x08
+.equ UART_CR_RXE,					0x09
+
+.equ UART_FR_RXFE,					0x04
+

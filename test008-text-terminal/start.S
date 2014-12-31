@@ -10,10 +10,14 @@
 .extern scr_init_frame
 .extern scr_set_colours
 .extern print_str
+.extern print_char
 .extern print_int
+.extern print_hex
 .extern scr_enable_cursor
 .extern gfx_rect
 .extern gfx_fill_rect
+
+.extern uart_init
 
 .arm
 
@@ -83,7 +87,21 @@ _reset_:
 	ldr r1, ready_msg_len
 	bl print_str
 
+	bl uart_init
+
 	bl scr_enable_cursor
+
+uart_loop:
+	bl uart_data_ready
+	cmp r0, #0
+	beq uart_loop
+
+	bl uart_read_data
+	cmp r0, #'\r'
+	moveq r0, #'\n'
+	bl print_char
+
+	b uart_loop
 
 spin_loop:
 	b spin_loop
@@ -102,10 +120,10 @@ foreground:
 	.word 0xFFFFFFFF
 
 ready_msg:
-	.string "READY>"
+	.string ">"
 .align
 ready_msg_len:
-	.word 6
+	.word 1
 newline:
 	.string "\n"
 //------------------------------------------------------------------

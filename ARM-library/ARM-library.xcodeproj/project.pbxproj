@@ -16,12 +16,14 @@
 		4AF3E3BD1A502E300042E342 /* gert.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = gert.S; sourceTree = "<group>"; };
 		4AF3E3BE1A502E300042E342 /* util.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = util.S; sourceTree = "<group>"; };
 		4AF3E3BF1A503A3C0042E342 /* video.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = video.S; sourceTree = "<group>"; };
+		4AFCBD811A533892009E246E /* uart.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = uart.S; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		4AF3E3AE1A5029290042E342 = {
 			isa = PBXGroup;
 			children = (
+				4AFCBD811A533892009E246E /* uart.S */,
 				4AA695B31A52C59D00107230 /* interrupt_handler.S */,
 				4A29444E1A50667F0084C298 /* conio.S */,
 				4AF3E3BF1A503A3C0042E342 /* video.S */,

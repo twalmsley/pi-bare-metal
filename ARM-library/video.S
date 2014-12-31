@@ -9,6 +9,7 @@
 .global scr_plot_xy
 .global scr_plot
 .global scr_draw_char
+.global scr_draw_char_in_r0
 .global scr_draw_sprite32
 .global scr_draw_sprite16
 .global scr_get_xy
@@ -76,6 +77,9 @@ scr_set_xy:
 //-------------------------------------------------------------------------------------------------
 // scr_draw_char - r0 points to the char byte, use current screen coords
 //-------------------------------------------------------------------------------------------------
+scr_draw_char_in_r0:				// Alternative entry
+	push {r4, r5, r6, r7, r8, lr}
+	b scr_char_already_in_r0
 scr_draw_char:
 	push {r4, r5, r6, r7, r8, lr}
 	//
@@ -83,6 +87,7 @@ scr_draw_char:
 	//
 	ldrb r0, [r0]
 	and r0, #0xff
+scr_char_already_in_r0:
 	//
 	// If its a newline char then just do that and return
 	//
