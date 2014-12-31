@@ -89,14 +89,18 @@ scr_draw_char:
 	and r0, #0xff
 scr_char_already_in_r0:
 	//
-	// If its a newline char then just do that and return
+	// Handle some of the ASCII control characters
 	//
-	teq r0, #0x0A
-	bne scr_draw_char_not_newline
-	bl scr_new_line
-	pop {r4, r5, r6, r7, r8, pc}	// Return
+	teq r0, #'\n'
+	beq scr_draw_char_new_line
+	teq r0, #'\r'
+	beq scr_draw_char_new_line
+	teq r0, #0x08				// Backspace
+	beq scr_draw_char_backspace
+	teq r0, #0x7F				// Backspace
+	beq scr_draw_char_backspace
 
-scr_draw_char_not_newline:
+scr_draw_char_skip_special:
 	sub r0, #0x20
 	//
 	// Get a pointer to the drawing position
@@ -162,7 +166,19 @@ scr_draw_char_byte_loop_end:
 	pople {r4, r5, r6, r7, r8, pc}
 
 	bl scr_new_line
-	pop {r4, r5, r6, r7, r8, pc}
+	pop {r4, r5, r6, r7, r8, pc}	// Return
+
+scr_draw_char_new_line:
+	bl scr_cursor_off
+	bl scr_new_line
+	bl scr_enable_cursor
+	pop {r4, r5, r6, r7, r8, pc}	// Return
+
+scr_draw_char_backspace:
+	bl scr_cursor_off
+	bl scr_backspace
+	bl scr_enable_cursor
+	pop {r4, r5, r6, r7, r8, pc}	// Return
 //-------------------------------------------------------------------------------------------------
 // scr_new_line - move the text 'cursor' to the start of the next line
 //-------------------------------------------------------------------------------------------------
@@ -179,6 +195,30 @@ scr_new_line:
 	addlt r4, #8
 	strlt r4, scr_draw_y
 
+	pop {r4, pc}
+//-------------------------------------------------------------------------------------------------
+// scr_backspace - go back one character if there's room
+//-------------------------------------------------------------------------------------------------
+scr_backspace:
+	push {r4, lr}
+
+	ldr r0, scr_draw_x
+	cmp r0, #8
+	poplt {r4, pc}		// Not enough room to backspace
+
+	sub r0, #8
+	str r0, scr_draw_x
+	//
+	// Draw a 'space'
+	//
+	mov r0, #' '
+	bl scr_draw_char_in_r0
+	//
+	// Move the cursor back again
+	//
+	ldr r0, scr_draw_x
+	sub r0, #8
+	str r0, scr_draw_x
 	pop {r4, pc}
 //-------------------------------------------------------------------------------------------------
 // scr_scroll - move the screen up one line (8 pixel rows)
@@ -406,7 +446,7 @@ scr_cursor_callback:
 
 	ldr r4, scr_cursor_blink_count
 	add r4, #1
-	cmp r4, #976/2 // About 0.5 secs
+	cmp r4, #976/4 // About 0.25 secs
 	bne scr_cursor_callback_exit
 	//
 	// Reset the counter and toggle the cursor
@@ -441,6 +481,27 @@ scr_cursor_blink_count:
 	.word 0x0
 scr_cursor_blink_onoff:
 	.word 0x0	// 0 = 0ff, 1 = on
+//-------------------------------------------------------------------------------------------------
+// Hide the cursor while we change screen position
+//-------------------------------------------------------------------------------------------------
+scr_cursor_off:
+	push {r4-r6, lr}
+
+	moveq r0, #0
+	bl int_set_callback1	// Disable the cursor callback
+
+	ldr r5, background
+
+	bl scr_get_xy_ptr	// in r0
+	add r0, #(4*7*SCREEN_X)
+
+	mov r6, #8	// 8-pixel underscore
+scr_cursor_off_loop:
+	str r5, [r0], #4
+	subs r6, #1
+	bne scr_cursor_off_loop
+
+	pop {r4-r6, pc}
 //-------------------------------------------------------------------------------------------------
 foreground: .word 0xFFFFFFFF
 background: .word 0xFF000000

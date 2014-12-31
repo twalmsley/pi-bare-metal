@@ -16,7 +16,7 @@
 .extern scr_enable_cursor
 .extern gfx_rect
 .extern gfx_fill_rect
-
+.extern uart_termnal
 .extern uart_init
 
 .arm
@@ -83,25 +83,7 @@ _reset_:
 	bl init_arm_timer
 	bl _enable_interrupts
 
-	ldr r0, =ready_msg
-	ldr r1, ready_msg_len
-	bl print_str
-
-	bl uart_init
-
-	bl scr_enable_cursor
-
-uart_loop:
-	bl uart_data_ready
-	cmp r0, #0
-	beq uart_loop
-
-	bl uart_read_data
-	cmp r0, #'\r'
-	moveq r0, #'\n'
-	bl print_char
-
-	b uart_loop
+	bl uart_termnal
 
 spin_loop:
 	b spin_loop
@@ -118,12 +100,4 @@ background:
 	.word 0xFF404040
 foreground:
 	.word 0xFFFFFFFF
-
-ready_msg:
-	.string ">"
-.align
-ready_msg_len:
-	.word 1
-newline:
-	.string "\n"
 //------------------------------------------------------------------
