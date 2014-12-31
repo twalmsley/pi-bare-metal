@@ -16,7 +16,7 @@
 .extern scr_enable_cursor
 .extern gfx_rect
 .extern gfx_fill_rect
-.extern uart_termnal
+.extern uart_terminal
 .extern uart_init
 
 .arm
@@ -83,7 +83,7 @@ _reset_:
 	bl init_arm_timer
 	bl _enable_interrupts
 
-	bl uart_termnal
+	bl uart_terminal
 
 spin_loop:
 	b spin_loop

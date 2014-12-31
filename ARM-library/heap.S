@@ -13,6 +13,14 @@
 
 //------------------------------------------------------------------
 heap_init:
+	//
+	// Skip if we're already initialised
+	//
+	ldr r0, heap_initialised
+	tst r0, r0
+	bne heap_init_exit
+	mov r0, #1
+	str r0, heap_initialised
     //
     // Get the free memory pointer in r0
     //
@@ -31,6 +39,9 @@ heap_init:
     str r1, [r0, #HEAP_NEXT_FREE_SEG_OFF]
 heap_init_exit:
     mov pc, lr
+//------------------------------------------------------------------
+heap_initialised:
+	.word 0
 //------------------------------------------------------------------
 // Allocate r0 bytes on the heap and update a linked list
 // return the address of the block in r0
