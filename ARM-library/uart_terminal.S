@@ -68,10 +68,12 @@ uart_terminal_exit:
 	pop {r4, pc}
 
 uart_terminal_cmd:
-	ldr r4, term_cmd_line_ptr
-	ldrb r4, [r4]
-	cmp r4, #'R'
-	moveq pc, #0
+	ldr r0, term_cmd_line_ptr
+	ldr r1, =term_reset_cmd
+	ldr r2, term_reset_cmd_len
+	bl util_byte_compare
+	cmp r0, #1
+	moveq pc, #0	//Restart the program from the _reset_ vector
 
 	bl uart_terminal_cmd_clear
 	bl uart_terminal_prompt
@@ -117,3 +119,8 @@ ready_msg:
 .align
 ready_msg_len:
 	.word 1
+term_reset_cmd:
+	.string "reset"
+.align
+term_reset_cmd_len:
+	.word 5

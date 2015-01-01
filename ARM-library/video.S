@@ -45,17 +45,11 @@ MBox_Read:
 scr_init_frame:
     push {lr}
 
-    ldr r3, background
-
     ldr r0,=SCR_FB_POINTER // R0 = Frame Buffer Pointer
     ldr r0, [r0]
-
-    mov r1, #(SCREEN_Y*SCREEN_X)
-init_frame_loop:
-    str r3, [r0],#4
-    subs r1, #1
-    bne init_frame_loop
-
+    ldr r1, background
+    mov r2, #(SCREEN_Y*SCREEN_X)
+	bl util_block_fill
     pop {pc}
 //-------------------------------------------------------------------------------------------------
 // scr_set_colours - r0 = foreground, r1 = background
