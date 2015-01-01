@@ -225,6 +225,8 @@ gert_led_off:
     str r0, [r1, #RPI_GPCLR0]
     ldmia sp!, {pc}
 //------------------------------------------------------------------
+// Return the gert button state in r0
+//------------------------------------------------------------------
 gert_button_state:
     ldr r1, RPI_GPIO_BASE
     ldr r0, [r1, #RPI_GPLEV0]

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B3FA2412-A428-46CF-BA97-FD59EEF7D9F7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>test009_gert_ADC_DAC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D3C0FED970385BB125F3358B3F8A383374485456</key>
+		<string>https://github.com/twalmsley/pi-bare-metal.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>test009_gert_ADC_DAC/test009_gert_ADC_DAC.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D3C0FED970385BB125F3358B3F8A383374485456</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/twalmsley/pi-bare-metal.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D3C0FED970385BB125F3358B3F8A383374485456</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D3C0FED970385BB125F3358B3F8A383374485456</string>
+			<key>IDESourceControlWCCName</key>
+			<string>pi-bare-metal</string>
+		</dict>
+	</array>
+</dict>
+</plist>

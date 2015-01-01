@@ -10,7 +10,8 @@ FILES = heap.S \
 	gfx.S \
 	interrupt_handler.S \
 	uart.S \
-	uart_terminal.S
+	uart_terminal.S \
+	gert_adc_dac.S
 
 OBJ = $(FILES:.S=.o)
 OUT = ../lib/libaosd_asm.a

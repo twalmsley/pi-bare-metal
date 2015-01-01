@@ -64,6 +64,12 @@
 .equ    RPI_GPCLR1,                       0x2C
 .equ    RPI_GPLEV0,                       0x34
 .equ    RPI_GPLEV1,                       0x38
+.equ	RPI_GPIO_ALT0,					  0x04
+.equ	RPI_GPIO_ALT1,					  0x05
+.equ	RPI_GPIO_ALT2,					  0x06
+.equ	RPI_GPIO_ALT3,					  0x07
+.equ	RPI_GPIO_ALT4,					  0x03
+.equ	RPI_GPIO_ALT5,					  0x02
 // Setup Frame Buffer constants
 .equ SCREEN_X,       640
 .equ SCREEN_Y,       480
@@ -82,7 +88,7 @@
 .equ UART0_MIS,						0x40
 .equ UART0_ICR,						0x44
 .equ UART0_DMACR,					0x48
-.equ UART0_CLOCK,					300000000
+.equ UART0_CLOCK,					3000000
 
 .equ UART0_LCRH_BRK,					0x00
 .equ UART0_LCRH_PEN,					0x01
@@ -98,3 +104,17 @@
 .equ UART0_FR_RXFE,					0x04
 .equ UART0_FR_TXFF,					0x05
 
+.equ RPI_SPI0_CS,					0x00
+.equ RPI_SPI0_FIFO,					0x04
+.equ RPI_SPI0_CLK,					0x08
+.equ RPI_SPI0_CLEAR_FIFO,			0x03
+.equ RPI_SPI0_CS0,					0x00
+.equ RPI_SPI0_CS1,					0x01
+.equ RPI_SPI0_CS2,					0x02
+.equ RPI_SPI0_TA,					0x07
+.equ RPI_SPI0_DONE,					0x10
+.equ RPI_SPI0_TXD,					0x11
+.equ RPI_SPI0_RXD,					0x12
+.equ RPI_SPI0_CSPOL0,				0x15
+.equ RPI_SPI0_CSPOL1,				0x16
+.equ RPI_SPI0_CSPOL2,				0x17
