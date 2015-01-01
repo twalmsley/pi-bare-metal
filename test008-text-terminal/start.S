@@ -16,8 +16,8 @@
 .extern scr_enable_cursor
 .extern gfx_rect
 .extern gfx_fill_rect
-.extern uart_terminal
-.extern uart_init
+.extern uart0_terminal
+.extern uart0_init
 
 .arm
 
@@ -83,7 +83,7 @@ _reset_:
 	bl init_arm_timer
 	bl _enable_interrupts
 
-	bl uart_terminal
+	bl uart0_terminal
 
 	ldr r0, =terminal_exit_msg
 	ldr r1, terminal_exit_msg_len
@@ -91,7 +91,7 @@ _reset_:
 
 	ldr r0, =terminal_exit_msg
 	ldr r1, terminal_exit_msg_len
-	bl uart_write_bytes
+	bl uart0_write_bytes
 
 spin_loop:
 	b spin_loop

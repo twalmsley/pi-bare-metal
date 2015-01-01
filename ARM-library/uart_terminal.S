@@ -10,7 +10,7 @@
 .equ TERM_MAX_CMDLINE, 400
 
 .include "constants.h"
-.global uart_terminal
+.global uart0_terminal
 
 .extern _reset_
 
@@ -20,11 +20,11 @@
 // Assumes the screen is initialised and the timers and interrupts
 // are enabled. Enables the cursor itself.
 //------------------------------------------------------------------
-uart_terminal:
+uart0_terminal:
 	push {r4, lr}
 
-	bl uart_init
-	bl uart_terminal_prompt
+	bl uart0_init
+	bl uart0_terminal_prompt
 	bl scr_enable_cursor
 	//
 	// Initialise the heap and allocate a command line buffer
@@ -41,71 +41,71 @@ uart_terminal:
 	//
 	// Enter the command loop
 	//
-uart_loop:
-	bl uart_data_ready
+uart0_loop:
+	bl uart0_data_ready
 	cmp r0, #0
-	beq uart_loop
+	beq uart0_loop
 
-	bl uart_read_data
+	bl uart0_read_data
 	mov r4, r0			// Save the character for further processing.
 	bl print_char
 	//
 	// If a \r or \n was entered process the command and reprint the prompt
 	//
 	cmp r4, #'\r'
-	beq uart_terminal_cmd
+	beq uart0_terminal_cmd
 	cmp r4, #'\n'
-	beq uart_terminal_cmd
+	beq uart0_terminal_cmd
 	cmp r4, #0x08
-	beq uart_terminal_backspace
+	beq uart0_terminal_backspace
 	cmp r4, #0x7F
-	beq uart_terminal_backspace
+	beq uart0_terminal_backspace
 	//
 	// Add the character to the command buffer if there's room
 	//
 	mov r0, r4
-	bl uart_write_byte	// Echo it back
-	bl uart_terminal_cmd_append
+	bl uart0_write_byte	// Echo it back
+	bl uart0_terminal_cmd_append
 
-	b uart_loop
+	b uart0_loop
 
-uart_terminal_exit:
+uart0_terminal_exit:
 	pop {r4, pc}
 
-uart_terminal_cmd:
+uart0_terminal_cmd:
 	//
 	// User entered \n or \r, so echo both back
 	//
 	mov r0, #'\r'
-	bl uart_write_byte	// Echo it back
+	bl uart0_write_byte	// Echo it back
 	mov r0, #'\n'
-	bl uart_write_byte	// Echo it back
+	bl uart0_write_byte	// Echo it back
 	//
 	// Now process the command in the buffer
 	//
-	bl uart_terminal_cmd_reset
-	bl uart_terminal_cmd_quit
+	bl uart0_terminal_cmd_reset
+	bl uart0_terminal_cmd_quit
 	//
 	// Clear the command buffer and show the command prompt
 	//
-	bl uart_terminal_cmd_clear
-	bl uart_terminal_prompt
-	b uart_loop				// Jump back into the command loop
+	bl uart0_terminal_cmd_clear
+	bl uart0_terminal_prompt
+	b uart0_loop				// Jump back into the command loop
 
-uart_terminal_backspace:
+uart0_terminal_backspace:
 	mov r0, #0x08
 
 	ldr r1, term_cmd_line_char_count
 	cmp r1, #0
 	subgt r1, #1
 	strgt r1, term_cmd_line_char_count
-	blgt uart_write_byte	// Echo back
+	blgt uart0_write_byte	// Echo back
 
-	b uart_loop				// Jump back into the command loop
+	b uart0_loop				// Jump back into the command loop
 //------------------------------------------------------------------
 // Handle 'reset'
 //------------------------------------------------------------------
-uart_terminal_cmd_reset:
+uart0_terminal_cmd_reset:
 	push {lr}
 
 	ldr r0, term_cmd_line_ptr
@@ -124,7 +124,7 @@ uart_terminal_cmd_reset:
 //------------------------------------------------------------------
 // Handle 'quit'
 //------------------------------------------------------------------
-uart_terminal_cmd_quit:
+uart0_terminal_cmd_quit:
 	push {lr}
 
 	ldr r0, term_cmd_line_ptr
@@ -138,13 +138,13 @@ uart_terminal_cmd_quit:
 	bl util_byte_compare
 	cmp r0, #1
 	popeq {lr}				// Restore the stack
-	beq uart_terminal_exit	// Exit the terminal program
+	beq uart0_terminal_exit	// Exit the terminal program
 
 	pop {pc}
 //------------------------------------------------------------------
 // Append the char in r0 to the command buffer if there is room
 //------------------------------------------------------------------
-uart_terminal_cmd_append:
+uart0_terminal_cmd_append:
 	ldr r1, term_cmd_line_char_count
 	cmp r1, #TERM_MAX_CMDLINE
 	movge pc, lr					// No room, so just ignore
@@ -158,7 +158,7 @@ uart_terminal_cmd_append:
 //------------------------------------------------------------------
 // Clear the command buffer
 //------------------------------------------------------------------
-uart_terminal_cmd_clear:
+uart0_terminal_cmd_clear:
 	mov r0, #0
 	str r0, term_cmd_line_char_count
 	mov pc, lr
@@ -171,7 +171,7 @@ term_cmd_line_char_count:
 //------------------------------------------------------------------
 // Display the prompt
 //------------------------------------------------------------------
-uart_terminal_prompt:
+uart0_terminal_prompt:
 	push {lr}
 	//
 	// Send to the Pi screen
@@ -184,7 +184,7 @@ uart_terminal_prompt:
 	//
 	ldr r0, =ready_msg
 	ldr r1, ready_msg_len
-	bl uart_write_bytes
+	bl uart0_write_bytes
 	pop {pc}
 //------------------------------------------------------------------
 ready_msg:
