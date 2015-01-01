@@ -56,10 +56,15 @@ uart_loop:
 	beq uart_terminal_cmd
 	cmp r4, #'\n'
 	beq uart_terminal_cmd
+	cmp r4, #0x08
+	beq uart_terminal_backspace
+	cmp r4, #0x7F
+	beq uart_terminal_backspace
 	//
 	// Add the character to the command buffer if there's room
 	//
 	mov r0, r4
+	bl uart_write_byte	// Echo it back
 	bl uart_terminal_cmd_append
 
 	b uart_loop
@@ -68,6 +73,40 @@ uart_terminal_exit:
 	pop {r4, pc}
 
 uart_terminal_cmd:
+	//
+	// User entered \n or \r, so echo both back
+	//
+	mov r0, #'\r'
+	bl uart_write_byte	// Echo it back
+	mov r0, #'\n'
+	bl uart_write_byte	// Echo it back
+	//
+	// Now process the command in the buffer
+	//
+	bl uart_terminal_cmd_reset
+	//
+	// Clear the command buffer and show the command prompt
+	//
+	bl uart_terminal_cmd_clear
+	bl uart_terminal_prompt
+	b uart_loop				// Jump back into the command loop
+
+uart_terminal_backspace:
+	mov r0, #0x08
+
+	ldr r1, term_cmd_line_char_count
+	cmp r1, #0
+	subgt r1, #1
+	strgt r1, term_cmd_line_char_count
+	blgt uart_write_byte	// Echo back
+	
+	b uart_loop				// Jump back into the command loop
+//------------------------------------------------------------------
+// Handle 'reset'
+//------------------------------------------------------------------
+uart_terminal_cmd_reset:
+	push {lr}
+
 	ldr r0, term_cmd_line_ptr
 	ldr r1, =term_reset_cmd
 	ldr r2, term_reset_cmd_len
@@ -75,9 +114,7 @@ uart_terminal_cmd:
 	cmp r0, #1
 	moveq pc, #0	//Restart the program from the _reset_ vector
 
-	bl uart_terminal_cmd_clear
-	bl uart_terminal_prompt
-	b uart_loop				// Jump back into the command loop
+	pop {pc}
 //------------------------------------------------------------------
 // Append the char in r0 to the command buffer if there is room
 //------------------------------------------------------------------
@@ -100,6 +137,7 @@ uart_terminal_cmd_clear:
 	str r0, term_cmd_line_char_count
 	mov pc, lr
 //------------------------------------------------------------------
+
 term_cmd_line_ptr:
 	.word 0
 term_cmd_line_char_count:
@@ -109,9 +147,18 @@ term_cmd_line_char_count:
 //------------------------------------------------------------------
 uart_terminal_prompt:
 	push {lr}
+	//
+	// Send to the Pi screen
+	//
 	ldr r0, =ready_msg
 	ldr r1, ready_msg_len
 	bl print_str
+	//
+	// Send to the uart
+	//
+	ldr r0, =ready_msg
+	ldr r1, ready_msg_len
+	bl uart_write_bytes
 	pop {pc}
 //------------------------------------------------------------------
 ready_msg:

@@ -96,4 +96,5 @@
 .equ UART_CR_RXE,					0x09
 
 .equ UART_FR_RXFE,					0x04
+.equ UART_FR_TXFF,					0x05
 

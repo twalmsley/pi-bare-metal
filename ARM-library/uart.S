@@ -11,6 +11,8 @@
 .global uart_init
 .global uart_data_ready
 .global uart_read_data
+.global uart_write_byte
+.global uart_write_bytes
 
 UART_BASE:
 	.word 0x20201000
@@ -65,7 +67,7 @@ uart_init:
 	// Setup the UART control register
 	//
 	mov r1, #0
-	orr r1, #(1<<UART_CR_RXE) | (0<<UART_CR_TXE)	// Enable receive
+	orr r1, #(1<<UART_CR_RXE) | (1<<UART_CR_TXE)	// Enable transmit and receive
 	str r1, [r0, #UART_CR]							// Update the CR
 	orr r1, #(1<<UART_CR_UARTEN)					// Also enable the UART
 	str r1, [r0, #UART_CR]							// Update the CR again
@@ -90,3 +92,44 @@ uart_read_data:
 	ldr r0, [r1, #UART_DR]
 	and r0, #0xFF			// Ignore the error bits for now.
 	pop {pc}
+//------------------------------------------------------------------
+// Write byte, wait for the fifo if necessary
+// r0 - byte to send
+//------------------------------------------------------------------
+uart_write_byte:
+	push {lr}
+	ldr r1, UART_BASE
+
+uart_tx_fifo_wait:
+	ldr r2, [r1, #UART_FR]
+	tst r2, #(1<<UART_FR_TXFF)
+	bne uart_tx_fifo_wait
+	//
+	// Write the byte.
+	//
+	strb r0, [r1, #UART_DR]
+
+	pop {pc}
+//------------------------------------------------------------------
+// Write bytes, wait for the fifo if necessary
+// r0 - pointer to bytes
+// r1 - number of bytes
+//------------------------------------------------------------------
+uart_write_bytes:
+	push {lr}
+	ldr r3, UART_BASE
+
+uart_write_bytes_loop:
+	ldr r2, [r3, #UART_FR]
+	tst r2, #(1<<UART_FR_TXFF)
+	bne uart_write_bytes_loop
+	//
+	// Write the byte.
+	//
+	ldrb r2, [r0], #1
+	strb r2, [r3, #UART_DR]
+	subs r1, #1
+	bne uart_write_bytes_loop
+
+	pop {pc}
+//------------------------------------------------------------------
