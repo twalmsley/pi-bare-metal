@@ -85,6 +85,14 @@ _reset_:
 
 	bl uart_terminal
 
+	ldr r0, =terminal_exit_msg
+	ldr r1, terminal_exit_msg_len
+	bl print_str
+
+	ldr r0, =terminal_exit_msg
+	ldr r1, terminal_exit_msg_len
+	bl uart_write_bytes
+
 spin_loop:
 	b spin_loop
 //------------------------------------------------------------------
@@ -101,3 +109,8 @@ background:
 foreground:
 	.word 0xFFFFFFFF
 //------------------------------------------------------------------
+terminal_exit_msg:
+	.string "Terminal has exited.\n"
+.align
+terminal_exit_msg_len:
+	.word 21

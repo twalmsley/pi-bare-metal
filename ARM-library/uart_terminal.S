@@ -84,6 +84,7 @@ uart_terminal_cmd:
 	// Now process the command in the buffer
 	//
 	bl uart_terminal_cmd_reset
+	bl uart_terminal_cmd_quit
 	//
 	// Clear the command buffer and show the command prompt
 	//
@@ -99,7 +100,7 @@ uart_terminal_backspace:
 	subgt r1, #1
 	strgt r1, term_cmd_line_char_count
 	blgt uart_write_byte	// Echo back
-	
+
 	b uart_loop				// Jump back into the command loop
 //------------------------------------------------------------------
 // Handle 'reset'
@@ -110,9 +111,34 @@ uart_terminal_cmd_reset:
 	ldr r0, term_cmd_line_ptr
 	ldr r1, =term_reset_cmd
 	ldr r2, term_reset_cmd_len
+	ldr r3, term_cmd_line_char_count
+
+	cmp r2, r3	// If the command buffer isn't the same length as the command then return
+	popne {pc}
+
 	bl util_byte_compare
 	cmp r0, #1
 	moveq pc, #0	//Restart the program from the _reset_ vector
+
+	pop {pc}
+//------------------------------------------------------------------
+// Handle 'quit'
+//------------------------------------------------------------------
+uart_terminal_cmd_quit:
+	push {lr}
+
+	ldr r0, term_cmd_line_ptr
+	ldr r1, =term_quit_cmd
+	ldr r2, term_quit_cmd_len
+	ldr r3, term_cmd_line_char_count
+
+	cmp r2, r3	// If the command buffer isn't the same length as the command then return
+	popne {pc}
+
+	bl util_byte_compare
+	cmp r0, #1
+	popeq {lr}				// Restore the stack
+	beq uart_terminal_exit	// Exit the terminal program
 
 	pop {pc}
 //------------------------------------------------------------------
@@ -171,3 +197,8 @@ term_reset_cmd:
 .align
 term_reset_cmd_len:
 	.word 5
+term_quit_cmd:
+	.string "quit"
+.align
+term_quit_cmd_len:
+	.word 4
