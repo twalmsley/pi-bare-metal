@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		4A29444E1A50667F0084C298 /* conio.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = conio.S; sourceTree = "<group>"; };
+		4A3FD2DE1A5552760080C29B /* font.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = font.inc; sourceTree = "<group>"; };
 		4A8F3DAC1A54484100DA4FAF /* uart_terminal.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = uart_terminal.S; sourceTree = "<group>"; };
 		4AA695B31A52C59D00107230 /* interrupt_handler.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = interrupt_handler.S; sourceTree = "<group>"; };
 		4AC4094C1A51BCA0009499A5 /* gfx.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = gfx.S; sourceTree = "<group>"; };
@@ -24,6 +25,7 @@
 		4AF3E3AE1A5029290042E342 = {
 			isa = PBXGroup;
 			children = (
+				4A3FD2DE1A5552760080C29B /* font.inc */,
 				4A8F3DAC1A54484100DA4FAF /* uart_terminal.S */,
 				4AFCBD811A533892009E246E /* uart.S */,
 				4AA695B31A52C59D00107230 /* interrupt_handler.S */,
