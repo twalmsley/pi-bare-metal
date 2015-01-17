@@ -5,8 +5,9 @@
 //  Created by Tony Walmsley on 01/01/2015.
 //  Copyright (c) 2015 Tony Walmsley. All rights reserved.
 //
-.global gert_spi_dac_init
+.global gert_spi_init
 .global gert_spi_dac_write
+.global gert_spi_adc_read
 
 .section ".text"
 
@@ -20,7 +21,7 @@ RPI_SPI_BASE:
 //------------------------------------------------------------------
 // Set up the spi port for the dac
 //------------------------------------------------------------------
-gert_spi_dac_init:
+gert_spi_init:
 	push {lr}
 	//
 	// Set up the GPIO correctly for the required alternate functions
@@ -70,6 +71,7 @@ gert_spi_dac_write:
 	//
 	ldr r0, RPI_SPI_BASE
 	ldr r1, [r0, #RPI_SPI0_CS]
+	bic r1, #3	// Clear all the CS bits
 	orr r1, #RPI_SPI0_CS1 | (1<<RPI_SPI0_TA)
 	str r1, [r0, #RPI_SPI0_CS]
 	//
@@ -108,3 +110,61 @@ gert_spi_dac_write_loop:
 
 	pop {pc}
 //------------------------------------------------------------------
+// Read from the ADC - send 2 bytes and read 2 bytes then extract the
+// 10-bit value to be returned in r0
+//------------------------------------------------------------------
+gert_spi_adc_read:
+	push {lr}
+	//
+	// Set up r2 for sending to the ADC
+	//
+	mov r2, #0x80
+	orr r2, r0, lsl #6	// Or-in the channel selection
+	//
+	// Enable the SPI and CS1
+	//
+	ldr r0, RPI_SPI_BASE
+	ldr r1, [r0, #RPI_SPI0_CS]
+	bic r1, #3	// Clear all the CS bits
+	orr r1, #RPI_SPI0_CS0 | (1<<RPI_SPI0_TA)
+	str r1, [r0, #RPI_SPI0_CS]
+	//
+	// Wait briefly to ensure the CS has been selected for a while
+	//
+	mov r0, #100
+	bl util_r0_delay
+	//
+	// Send it twice
+	//
+	ldr r0, RPI_SPI_BASE
+	str r2, [r0, #RPI_SPI0_FIFO]
+	str r2, [r0, #RPI_SPI0_FIFO]
+	//
+	// Wait for the DONE flag
+	//
+gert_spi_adc_read_loop:
+	ldr r1, [r0, #RPI_SPI0_CS]
+	tst r1, #(1<<RPI_SPI0_DONE)
+	beq gert_spi_adc_read_loop
+	//
+	// Write is DONE so drain the receive fifo
+	//
+	ldr r2, [r0, #RPI_SPI0_FIFO]
+	ldr r3, [r0, #RPI_SPI0_FIFO]
+	lsl r2, #7
+	orr r2, r3, lsr #1
+	//
+	// Wait a while then disable the SPI device
+	//
+	mov r0, #100
+	bl util_r0_delay
+
+	ldr r0, RPI_SPI_BASE
+	ldr r1, [r0, #RPI_SPI0_CS]
+	bic r1, #(1<<RPI_SPI0_TA)
+	str r1, [r0, #RPI_SPI0_CS]
+	//
+	// Move the result to r0
+	//
+	mov r0, r2
+	pop {pc}
