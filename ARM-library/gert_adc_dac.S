@@ -39,7 +39,6 @@ gert_spi_dac_init:
 	str r1, [r0, #RPI_SPI0_CLK]
 
 	mov r1, #(RPI_SPI0_CLEAR_FIFO << 4)
-	orr r1, #(1<<RPI_SPI0_CSPOL1)
 	str r1, [r0, #RPI_SPI0_CS]
 
 	pop {pc}
@@ -71,7 +70,7 @@ gert_spi_dac_write:
 	//
 	ldr r0, RPI_SPI_BASE
 	ldr r1, [r0, #RPI_SPI0_CS]
-	orr r1, #(1<<RPI_SPI0_CS1) | (1<<RPI_SPI0_TA)
+	orr r1, #RPI_SPI0_CS1 | (1<<RPI_SPI0_TA)
 	str r1, [r0, #RPI_SPI0_CS]
 	//
 	// Wait briefly to ensure the CS has been selected for a while

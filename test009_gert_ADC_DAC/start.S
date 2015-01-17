@@ -87,7 +87,7 @@ _reset_:
 
 	bl gert_spi_dac_init
 	mov r0, #1				// DAC channel 1
-	mov	r1, #0xFF<<4		// Max voltage
+	mov	r1, #0x80<<4		// Half voltage
 	bl gert_spi_dac_write
 
 	bl uart0_terminal
