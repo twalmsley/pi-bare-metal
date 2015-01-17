@@ -21,6 +21,7 @@
 .extern gert_spi_dac_init
 .extern gert_spi_dac_write
 .extern util_r0_delay
+.extern util_itoa
 
 .arm
 
@@ -86,6 +87,13 @@ _reset_:
 	bl init_arm_timer
 	bl _enable_interrupts
 
+	//
+	// Init UART0
+	//
+	bl uart0_init
+	//
+	// Init SPI
+	//
 	bl gert_spi_init
 	mov r0, #1				// DAC channel 1
 	mov	r1, #0x80<<4		// Half voltage
@@ -95,10 +103,25 @@ adc_read_loop:
 	mov r0, #0				// ADC channel 0
 	bl gert_spi_adc_read
 
+	mov r4, r0 // Save the ADC value just read
+	//
+	// Print value to the screen
+	//
 	mov r1, #0
 	bl print_int
 	mov r0, #'\n'
 	bl print_char
+	//
+	// Print value to the uart
+	//
+	mov r0, r4
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
 	//
 	// Wait a while and try again
 	//

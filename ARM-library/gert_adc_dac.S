@@ -28,9 +28,12 @@ gert_spi_init:
 	// (7, 8, 9, 10 and 11 to ALT0)
 	//
 	ldr r0, RPI_GPIO_BASE
-	mov r1, #(RPI_GPIO_ALT0 << 21) | (RPI_GPIO_ALT0 << 24) | (RPI_GPIO_ALT0 << 27)
+	ldr r1, [r0, #RPI_GPFSEL0]
+	orr r1, #(RPI_GPIO_ALT0 << 21) | (RPI_GPIO_ALT0 << 24) | (RPI_GPIO_ALT0 << 27)
 	str r1, [r0, #RPI_GPFSEL0]
-	mov r1, #(RPI_GPIO_ALT0 << 0) | (RPI_GPIO_ALT0 << 3)
+	
+	ldr r1, [r0, #RPI_GPFSEL1]
+	orr r1, #(RPI_GPIO_ALT0 << 0) | (RPI_GPIO_ALT0 << 3)
 	str r1, [r0, #RPI_GPFSEL1]
 	//
 	// Set the SPI clock divider to 256 (should result in ~1MHz SPI clock)

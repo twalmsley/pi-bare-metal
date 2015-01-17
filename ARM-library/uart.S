@@ -33,11 +33,11 @@ uart0_init:
 	//
 	// Set up the GPIO14 and 15 pins
 	//
-	mov r0, #0b100	// Alt function 0
-	mov r1, #0
-	orr r1, r0, lsl #12	// GPIO 14 Alt Function - Tx0
-	orr r1, r0, lsl #15 // GPIO 15 Alt Function - Rx0
+	mov r2, #0b100	// Alt function 0
 	ldr r0, GPIO_BASE
+	ldr r1, [r0, #RPI_GPFSEL1]
+	orr r1, r2, lsl #12	// GPIO 14 Alt Function - Tx0
+	orr r1, r2, lsl #15 // GPIO 15 Alt Function - Rx0
 	str r1, [r0, #RPI_GPFSEL1]
 	//
 	// Make sure the UART is disabled
