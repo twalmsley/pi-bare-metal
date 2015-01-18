@@ -16,16 +16,12 @@
 
 //------------------------------------------------------------------
 // Start a uart text terminal at 19200 baud, 8N1
-//
-// Assumes the screen is initialised and the timers and interrupts
-// are enabled. Enables the cursor itself.
 //------------------------------------------------------------------
 uart0_terminal:
 	push {r4, lr}
 
 	bl uart0_init
 	bl uart0_terminal_prompt
-	bl scr_enable_cursor
 	//
 	// Initialise the heap and allocate a command line buffer
 	//
@@ -48,7 +44,6 @@ uart0_loop:
 
 	bl uart0_read_data
 	mov r4, r0			// Save the character for further processing.
-	bl print_char
 	//
 	// If a \r or \n was entered process the command and reprint the prompt
 	//
@@ -173,12 +168,6 @@ term_cmd_line_char_count:
 //------------------------------------------------------------------
 uart0_terminal_prompt:
 	push {lr}
-	//
-	// Send to the Pi screen
-	//
-	ldr r0, =ready_msg
-	ldr r1, ready_msg_len
-	bl print_str
 	//
 	// Send to the uart
 	//
