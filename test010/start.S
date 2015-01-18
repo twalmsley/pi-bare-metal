@@ -59,10 +59,42 @@ _reset_:
 	bl init_arm_timer
 	bl _enable_interrupts
 	//
-	// Start the terminal (also initialises UART0
+	// Use the gert_led functions to set the IO state for pins 18, 21, 22, 23, 24, and 25
+	// that should be connected to the hex darlington driver chip on the gertboard
 	//
-	bl uart0_terminal
+	mov r0, #0b1111110
+	bl gert_init_leds
 spin_loop:
+	//
+	// Turn them all off
+	//
+	mov r4, #6
+main_led_off_loop:
+	mov r0, r4
+	bl gert_led_off
+	subs r4, #1
+	bne main_led_off_loop
+	//
+	// Wait a bit
+	//
+	mov r0, #(1<<24)
+	bl util_r0_delay
+	//
+	// Turn them all on
+	//
+	mov r4, #6
+main_led_on_loop:
+	mov r0, r4
+	bl gert_led_on
+	subs r4, #1
+	bne main_led_on_loop
+	//
+	// Wait a bit
+	//
+	mov r0, #(1<<24)
+	bl util_r0_delay
+
+
 	b spin_loop
 //------------------------------------------------------------------
 _enable_interrupts:

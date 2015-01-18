@@ -7,7 +7,7 @@ FLAGS = -Wall -Wl,-T,rpi.x $(C_FLAGS)
 FILES = cstartup.c \
     start.S
 
-TARGET=test009.exe
+TARGET=test010.exe
 
 all : compile kernel
 

@@ -84,7 +84,7 @@ arm_gpio_interrupt_pending:
 //--------------------------
     push {lr}
     //
-    // Check for the button on GPIO25 and reset the LED counter if it had an event
+    // Check for the button on GPIO25
     //
     ldr r0, GPIO_BASE
     ldr r1, [r0, #RPI_GPEDS0]
@@ -165,7 +165,7 @@ int_callback3:
 int_callback4:
 	.word 0	
 //-------------------------------------------------------------
-// Store a callback function - address is in r0, must not be null
+// Store a callback function - address is in r0, null to disable it
 //-------------------------------------------------------------
 int_set_callback1:
 	str r0, int_callback1
