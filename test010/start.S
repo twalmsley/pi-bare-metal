@@ -62,6 +62,9 @@ _reset_:
 	// Use the gert_led functions to set the IO state for pins 18, 21, 22, 23, 24, and 25
 	// that should be connected to the hex darlington driver chip on the gertboard
 	//
+	// This one probably isn't going to become anything useful - it may just be a template for
+	// future work.
+	//
 	mov r0, #0b1111110
 	bl gert_init_leds
 spin_loop:
