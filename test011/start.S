@@ -63,7 +63,7 @@ _reset_:
 	ldr r0, =data_words// r0 points to the data words
 	ldr r1, n_data_words// r1 is the number of data words
 	mov r2, #6			// This is the word we're searching for
-	bl search_func
+	bl f_search
 	//
 	// Display the result (in r0) - should be 4 the first time, but 3 after sort
 	//
@@ -80,7 +80,7 @@ show_result:
 	//
 	ldr r0, =data_words// r0 points to the data words
 	ldr r1, n_data_words// r1 is the number of data words
-	bl f_insertion_sort
+	bl f_selection_sort
 	//
 	// Display the list
 	//
@@ -117,66 +117,6 @@ _enable_interrupts:
     msr     cpsr_c, r0
 
     mov     pc, lr
-//------------------------------------------------------------------
-// Uses insertion sort to sort the integers in-place
-// r0 = pointer to the data items
-// r1 = the number of items
-//------------------------------------------------------------------
-f_insertion_sort:
-	push {r4-r8, lr}
-
-	mov r4, #2					// for j = 2 to A.length
-f_insertion_sort_for_loop:
-	ldr r5, [r0, r4, lsl #2]	// key = A[j]
-
-	mov r6, r4					// i = j-1
-f_insertion_sort_while:
-	subs r6, #1
-
-	ble f_insertion_sort_1		// while i > 0 and A[i] > key
-	ldr r7, [r0, r6, lsl #2]
-	cmp r7, r5
-	ble f_insertion_sort_1
-
-	add r8, r6, #1				// A[i+1] = A[i]
-	str r7, [r0, r8, lsl #2]
-
-	b f_insertion_sort_while
-
-f_insertion_sort_1:
-	add r8, r6, #1				// A[i+1] = key
-	str r5, [r0, r8, lsl #2]
-
-	adds r4, #1
-	cmp r4, r1
-	blt f_insertion_sort_for_loop
-
-f_insertion_sort_return:
-	pop {r4-r8, pc}
-//------------------------------------------------------------------
-// Uses a linear search to find the first occurrance of a value
-// or returns 0 if not found
-//
-// r0 = pointer to the data items
-// r1 = the number of items
-// r2 = the value to be searched for
-//------------------------------------------------------------------
-search_func:
-	push {r4-r5, lr}
-	mov r4, #1			// Loop index
-search_loop:
-	ldr r5, [r0, r4, lsl #2]
-	cmp r2, r5
-	beq end_loop
-	adds r4, #1
-	cmp r4, r1
-	bne search_loop
-
-	mov r4, #0// Not found, so use 0 as the return value
-end_loop:
-	mov r0, r4// return the index of the element found, or 0
-search_return:
-	pop {r4-r5, pc}
 //------------------------------------------------------------------
 data_words:
 	.word 0,7,37,745,6,86,9,2,37,26,1

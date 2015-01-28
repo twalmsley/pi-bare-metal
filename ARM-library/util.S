@@ -7,6 +7,9 @@
 .global util_block_fill
 .global util_byte_compare
 .global util_itoa
+.global f_insertion_sort
+.global f_selection_sort
+.global f_search
 
 //------------------------------------------------------------------
 // Counts down until r0 is 0
@@ -221,6 +224,121 @@ util_itoa_loop_end_check:
 	sub r0, r9
 	mov r1, r9					// String length
 	pop {r4, r5, r6, r7, r8, r9, pc}
+//------------------------------------------------------------------
+// Uses insertion sort to sort the integers in-place
+// r0 = pointer to the data items
+// r1 = the number of items
+//------------------------------------------------------------------
+f_insertion_sort:
+	push {r4-r8, lr}
+
+	mov r4, #2					// for j = 2 to A.length
+f_insertion_sort_for_loop:
+	ldr r5, [r0, r4, lsl #2]	// key = A[j]
+
+	mov r6, r4					// i = j-1
+f_insertion_sort_while:
+	subs r6, #1
+
+	ble f_insertion_sort_1		// while i > 0 and A[i] > key
+	ldr r7, [r0, r6, lsl #2]
+	cmp r7, r5
+	ble f_insertion_sort_1
+
+	add r8, r6, #1				// A[i+1] = A[i]
+	str r7, [r0, r8, lsl #2]
+
+	b f_insertion_sort_while
+
+f_insertion_sort_1:
+	add r8, r6, #1				// A[i+1] = key
+	str r5, [r0, r8, lsl #2]
+
+	adds r4, #1
+	cmp r4, r1
+	blt f_insertion_sort_for_loop
+
+f_insertion_sort_return:
+	pop {r4-r8, pc}
+//------------------------------------------------------------------
+// Uses selection sort to sort the integers in-place
+// r0 = pointer to the data items
+// r1 = the number of items
+//
+//	n = A.length
+//	for i = 0 to n-2
+//		smallest = A[i]
+//		smallest_index = i
+//		for j = i+1 to n-1
+//			if A[j] < smallest
+//				smallest = A[j]
+//				smallest_index = j
+//		tmp = A[i]
+//		A[i] = smallest
+//		A[smallest_index] = tmp
+//
+// INVARIANT: A[0..i] is in non-descending order
+//
+//------------------------------------------------------------------
+f_selection_sort:
+	push {r4-r8, lr}
+
+	mov r4, #0					// i = 0 to n-2
+	sub r5, r1, #2
+
+f_selection_sort_iloop_start:
+	ldr r6, [r0, r4, lsl #2]	// smallest = A[i]
+	mov r7, r4					// smallest_index = i
+
+	mov r8, r4					// for j = i+1 to n-1
+f_selection_sort_jloop_start:
+	add r8, #1
+	cmp r8, r1
+	bge f_selection_sort_jloop_end
+
+	ldr r9, [r0, r8, lsl #2]	// if A[j] < smallest
+	cmp r9, r6
+	bge f_selection_sort_skip_if
+
+	mov r6, r9					// smallest = A[j]
+	mov r7, r8					// smallest_index = j
+f_selection_sort_skip_if:
+	b f_selection_sort_jloop_start
+
+f_selection_sort_jloop_end:
+	ldr r10, [r0, r4, lsl #2]	// tmp = A[i]
+	str r6, [r0, r4, lsl #2]	// A[i] = smallest
+	str r10, [r0, r7, lsl #2]	// A[smallest_index] = tmp
+
+	add r4, #1
+	cmp r4, r1
+	blt f_selection_sort_iloop_start
+f_selection_sort_return:
+	pop {r4-r8, pc}
+//------------------------------------------------------------------
+// Uses a linear search to find the first occurrance of a value
+// or returns 0 if not found
+//
+// r0 = pointer to the data items
+// r1 = the number of items
+// r2 = the value to be searched for
+//------------------------------------------------------------------
+f_search:
+	push {r4-r5, lr}
+	mov r4, #1			// Loop index
+search_loop:
+	ldr r5, [r0, r4, lsl #2]
+	cmp r2, r5
+	beq end_loop
+	adds r4, #1
+	cmp r4, r1
+	bne search_loop
+
+	mov r4, #0// Not found, so use 0 as the return value
+end_loop:
+	mov r0, r4// return the index of the element found, or 0
+search_return:
+	pop {r4-r5, pc}
 //--------------------------------------------------------------------------------------
 util_format_buffer:
 	.string "9999999999"
