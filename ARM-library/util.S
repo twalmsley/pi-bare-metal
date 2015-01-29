@@ -29,13 +29,19 @@ pseud_rand_seeds:
 	str r2, PRNG_Z
 	str r3, PRNG_W
 	mov pc, lr
-PRNG_X: .word 83276498
-PRNG_Y: .word 38239823
-PRNG_Z: .word 37924710
-PRNG_W: .word 93847181
+PRNG_X: .word 1
+PRNG_Y: .word 2
+PRNG_Z: .word 3
+PRNG_W: .word 4
 
 //------------------------------------------------------------------
 // Get the next pseudo random in r0
+//
+// uint32_t xorshift128(void) {
+//     uint32_t t = x ^ (x << 11);
+//     x = y; y = z; z = w;
+//     return w = w ^ (w >> 19) ^ t ^ (t >> 8);
+// }
 //------------------------------------------------------------------
 pseud_rand:
 	push {r4, r5, lr}
@@ -44,18 +50,19 @@ pseud_rand:
 	ldr r2, PRNG_Z
 	ldr r3, PRNG_W
 
-	mov r4, r0, LSL #11
-	eor r4, r4, r0
-	eor r4, r4, LSR #8
+	mov r4, r0, LSL #11		// t = x<<11
+	eor r4, r4, r0			// t = t ^ X
 
-	str r1, PRNG_X
-	str r2, PRNG_Y
-	str r3, PRNG_Z
+	str r1, PRNG_X			// x = y
+	str r2, PRNG_Y			// y = z
+	str r3, PRNG_Z			// z = w
 
-	mov r5, r3, LSR #19
-	eor r3, r5
+	mov r5, r3, LSR #19		// r5 = w>>19
+	eor r3, r5				// w = (w>>19) ^ w
 
-	eor r3, r4
+	eor r3, r4				// w = (w>>19) ^ w ^ t
+	eor r4, r4, LSR #8		// t = t >> 8
+	eor r3, r4				// w = (w>>19) ^ w ^ t ^ (t>>8)
 
 	str r3, PRNG_W
 	mov r0, r3

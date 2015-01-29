@@ -4,6 +4,8 @@
 
 .global _start
 
+.equ NUM_INTS, 1024
+
 .arm
 
 _start:
@@ -58,14 +60,37 @@ _reset_:
 
 	bl _enable_interrupts
 	//
+	// Create a buffer and set its values to random-ish data
+	//
+	bl heap_init
+	mov r0, #NUM_INTS<<2	// A number of words
+	bl heap_alloc_buffer	// Allocate some memory
+	mov r4, r0				// Save the address for later
+	//
+	// Create 100 random numbers and store in the memory buffer
+	//
+	mov r5, #NUM_INTS
+	sub r5, #1
+rand_loop:
+	bl pseud_rand			// r0 now contains a random number
+	str r0, [r4, r5, lsl #2]
+	subs r5, #1
+	bge rand_loop
+	//
+	// Display the list
+	//
+	mov r0, r4			// r0 points to the data words
+	mov r1, #NUM_INTS	// r1 is the number of data words
+	bl dump_buffer
+	//
 	// Call a search function to find a value and return its index
 	//
-	ldr r0, =data_words// r0 points to the data words
-	ldr r1, n_data_words// r1 is the number of data words
-	mov r2, #6			// This is the word we're searching for
+	mov r0, r4			// r0 points to the data words
+	mov r1, #NUM_INTS		// r1 is the number of data words
+	ldr r2, [r0, #(NUM_INTS/2)<<2]	// This is the word we're searching for
 	bl f_search
 	//
-	// Display the result (in r0) - should be 4 the first time, but 3 after sort
+	// Display the result (in r0)
 	//
 show_result:
 	mov r1, #0
@@ -78,14 +103,24 @@ show_result:
 	//
 	// Call a function to sort the list using insertion sort, then display the list
 	//
-	ldr r0, =data_words// r0 points to the data words
-	ldr r1, n_data_words// r1 is the number of data words
+	mov r0, r4				// r0 points to the data words
+	mov r1, #NUM_INTS		// r1 is the number of data words
 	bl f_selection_sort
 	//
 	// Display the list
 	//
-	ldr r0, =data_words// r0 points to the data words
-	ldr r1, n_data_words// r1 is the number of data words
+	mov r0, r4				// r0 points to the data words
+	mov r1, #NUM_INTS		// r1 is the number of data words
+	bl dump_buffer
+	//
+	// Start the terminal
+	//
+	bl uart0_terminal
+spin_loop:
+	b spin_loop
+//------------------------------------------------------------------
+dump_buffer:
+	push {r4-r6, lr}
 	mov r4, #0
 	mov r5, r0
 	mov r6, r1
@@ -104,12 +139,7 @@ loop_1:
 	bl uart0_write_byte
 	mov r0, #'\n'
 	bl uart0_write_byte
-	//
-	// Start the terminal
-	//
-	bl uart0_terminal
-spin_loop:
-	b spin_loop
+	pop {r4-r6, pc}
 //------------------------------------------------------------------
 _enable_interrupts:
     mrs     r0, cpsr
@@ -118,8 +148,5 @@ _enable_interrupts:
 
     mov     pc, lr
 //------------------------------------------------------------------
-data_words:
-	.word 0,7,37,745,6,86,9,2,37,26,1
-n_data_words:
-	.word 11
+// End
 //------------------------------------------------------------------
