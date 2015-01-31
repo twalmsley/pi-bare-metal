@@ -59,10 +59,39 @@ _reset_:
     mov     sp, #(448 * (1024 * 1024)) - 4
 
 	bl _enable_interrupts
+	bl uart0_init
 	//
 	// Create a buffer and set its values to random-ish data
 	//
 	bl malloc_init
+	//
+	// Try the merge function
+	//
+	ldr r0, =merge_data1	// Pointer to the words
+	mov r1, #0				// first index
+	mov r2, #9				// last index
+	bl f_merge_sort
+	//
+	// Display the result
+	//
+	ldr r0, =merge_data1	// Pointer to the words
+	mov r1, #10				// The number of words
+	bl dump_buffer
+	//
+	bl test1
+	//
+	//
+	// Start the terminal
+	//
+	bl uart0_terminal
+spin_loop:
+	b spin_loop
+//------------------------------------------------------------------
+// test 1
+//------------------------------------------------------------------
+test1:
+	push {lr}
+
 	mov r0, #NUM_INTS		// A number of words
 	bl malloc				// Allocate some memory
 	mov r4, r0				// Save the address for later
@@ -104,20 +133,16 @@ show_result:
 	// Call a function to sort the list using insertion sort, then display the list
 	//
 	mov r0, r4				// r0 points to the data words
-	mov r1, #NUM_INTS		// r1 is the number of data words
-	bl f_selection_sort
+	mov r1, #0				// r1 is the first index
+	mov r2, #NUM_INTS-1		// r2 is the last index
+	bl f_merge_sort
 	//
 	// Display the list
 	//
 	mov r0, r4				// r0 points to the data words
 	mov r1, #NUM_INTS		// r1 is the number of data words
 	bl dump_buffer
-	//
-	// Start the terminal
-	//
-	bl uart0_terminal
-spin_loop:
-	b spin_loop
+	pop {pc}
 //------------------------------------------------------------------
 dump_buffer:
 	push {r4-r6, lr}
@@ -147,6 +172,10 @@ _enable_interrupts:
     msr     cpsr_c, r0
 
     mov     pc, lr
+//------------------------------------------------------------------
+merge_data1:
+	.word 2,4,6,8,10
+	.word 1,3,5,7,9
 //------------------------------------------------------------------
 // End
 //------------------------------------------------------------------

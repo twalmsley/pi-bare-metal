@@ -10,6 +10,7 @@
 .global f_insertion_sort
 .global f_selection_sort
 .global f_search
+.global f_merge_sort
 
 //------------------------------------------------------------------
 // Counts down until r0 is 0
@@ -349,11 +350,48 @@ search_return:
 //------------------------------------------------------------------
 // Merge sort
 //
+// r0 points to the aray
+// r1 is the first index
+// r2 is the second index
+//------------------------------------------------------------------
+f_merge_sort:
+	push {r0-r5, lr}
+
+	cmp r1, r2				// Recursed far enough?
+	bge f_merge_sort_end
+
+	mov r3, r0			// Save the params
+	mov r4, r1			// Save the params
+	mov r5, r2			// Save the params
+
+	add r2, r1, r2
+	lsr r2, #1
+	bl f_merge_sort
+
+	mov r1, r2
+	add r1, #1
+	mov r2, r5
+	bl f_merge_sort
+
+	mov r0, r3
+	add r1, r9, #1
+	mov r2, r4
+	add r3, r4, r5
+	lsr r3, #1
+	add r3, #1
+	mov r4, r5
+	bl f_merge
+
+f_merge_sort_end:
+	pop {r0-r5, pc}
+//------------------------------------------------------------------
+// Merge
+//
 // r0 = pointer to the data items
 // r1 = the number of items
-// r2 = p
-// r3 = q
-// r4 = r
+// r2 = p - the start index
+// r3 = q - index of start of next sorted subset
+// r4 = r - index of the last item
 //
 //	MERGE (A,p,q,r)
 //
@@ -392,12 +430,12 @@ f_merge:
 	push {r3}		//[sp+4]	= q
 	push {r4}		//[sp]		= r
 
-//	n1 = q-p+1
+//	n1 = q-p
 	sub r5, r3, r2
-	sub r5, #1				// r5 is n1
 
 //	n2 = r-q
 	sub r6, r4, r3			// r6 is n2
+	add r6, #1
 
 //	new L[1..n1]
 	mov r0, r5
@@ -441,9 +479,9 @@ f_merge_k_loop:
 
 //		if i <= n1 and j <= n2 and L[i] <= R[j]
 	cmp r0, r5
-	bgt f_merge_i_gt_n1
+	bge f_merge_i_gt_n1
 	cmp r1, r6
-	bgt f_merge_j_gt_n2
+	bge f_merge_j_gt_n2
 	ldr r4, [r7, r0, lsl #2]
 	ldr r9, [r8, r1, lsl #2]
 	cmp r4, r9
@@ -477,7 +515,7 @@ f_merge_j_gt_n2:				// if j > n2
 f_merge_k_loop_end:
 	add r2, #1
 	cmp r2, r3
-	bne f_merge_k_loop
+	ble f_merge_k_loop
 
 f_merge_ret:
 	mov r0, r7			// Free buffer L
