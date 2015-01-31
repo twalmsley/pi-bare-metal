@@ -69,16 +69,16 @@ _reset_:
 	//
 	ldr r0, =merge_data1	// Pointer to the words
 	mov r1, #0				// first index
-	mov r2, #9				// last index
+	mov r2, #10				// last index
 	bl f_merge_sort
 	//
 	// Display the result
 	//
 	ldr r0, =merge_data1	// Pointer to the words
-	mov r1, #10				// The number of words
+	mov r1, #11				// The number of words
 	bl dump_buffer
 	//
-	bl test1
+	//bl test1
 	//
 	//
 	// Start the terminal
@@ -174,8 +174,7 @@ _enable_interrupts:
     mov     pc, lr
 //------------------------------------------------------------------
 merge_data1:
-	.word 2,4,6,8,10
-	.word 1,3,5,7,9
+	.word 11,10,9,8,7,6,5,4,3,2,1
 //------------------------------------------------------------------
 // End
 //------------------------------------------------------------------

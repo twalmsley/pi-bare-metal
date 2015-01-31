@@ -7,6 +7,7 @@ FILES = heap.S \
 	util.S \
 	video.S \
 	conio.S \
+	sort.S \
 	gfx.S \
 	interrupt_handler.S \
 	uart.S \
