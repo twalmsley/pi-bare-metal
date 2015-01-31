@@ -346,6 +346,159 @@ end_loop:
 	mov r0, r4// return the index of the element found, or 0
 search_return:
 	pop {r4-r5, pc}
+//------------------------------------------------------------------
+// Merge sort
+//
+// r0 = pointer to the data items
+// r1 = the number of items
+// r2 = p
+// r3 = q
+// r4 = r
+//
+//	MERGE (A,p,q,r)
+//
+//	n1 = q-p+1
+//	n2 = r-q
+//	new L[1..n1]
+//	new R[1..n2]
+//
+//	for i = 1 to n1
+//		L[i] = A[p+i-1]
+//	for i = 1 to n2
+//		R[i] = A[q+i]
+//
+//	i = 1
+//	j = 1
+//	for k = p to r
+//		if i <= n1 and j <= n2 and L[i] <= R[j]
+//			A[k] = L[i]
+//			i = i + 1
+//		if i <= n1 and j <= n2 and L[i] > R[j]
+//			A[k] = R[j]
+//			j = j + 1
+//		if i > n1
+//			A[k] = R[j]
+//			j = j + 1
+//		if j > n2
+//			A[k] = L[i]
+//			i = i + 1
+//------------------------------------------------------------------
+f_merge:
+	push {r5-r8, lr}
+
+	push {r0}		//[sp+16]	= pointer to A
+	push {r1}		//[sp+12]	= number of items
+	push {r2}		//[sp+8]	= p
+	push {r3}		//[sp+4]	= q
+	push {r4}		//[sp]		= r
+
+//	n1 = q-p+1
+	sub r5, r3, r2
+	sub r5, #1				// r5 is n1
+
+//	n2 = r-q
+	sub r6, r4, r3			// r6 is n2
+
+//	new L[1..n1]
+	mov r0, r5
+	bl malloc
+	mov r7, r0				// r7 points to L
+
+//	new R[1..n2]
+	mov r0, r6
+	bl malloc
+	mov r8, r0				// r8 points to R
+
+//	for i = 1 to n1
+//		L[i] = A[p+i-1]
+	mov r0, r7				// r0 points to L
+	ldr r1, [sp, #16]		// r1 points to the start of A
+	ldr r2, [sp, #8]		// r2 is p
+	add r1, r2, lsl #2		// r1 points to A[p]
+	mov r2, r5				// r2 is n1
+	bl f_copy_words
+
+//	for i = 1 to n2
+//		R[i] = A[q+i]
+	mov r0, r8				// r0 points to R
+	ldr r1, [sp, #16]		// r1 points to the start of A
+	ldr r2, [sp, #4]		// r2 is q
+	add r1, r2, lsl #2		// r1 points to A[q]
+	mov r2, r6				// r2 is n2
+	bl f_copy_words
+
+//
+//	i = 1
+//	j = 1
+	mov r0, #0		// r0 is i
+	mov r1, #0		// r1 is j
+
+//	for k = p to r
+	ldr r2, [sp, #8]		// r2 is k and starts at p
+	ldr r3, [sp]			// r3 is r
+
+f_merge_k_loop:
+
+//		if i <= n1 and j <= n2 and L[i] <= R[j]
+	cmp r0, r5
+	bgt f_merge_i_gt_n1
+	cmp r1, r6
+	bgt f_merge_j_gt_n2
+	ldr r4, [r7, r0, lsl #2]
+	ldr r9, [r8, r1, lsl #2]
+	cmp r4, r9
+	bgt f_merge_Li_gt_Rj
+	ldr r9, [sp, #16]			//			A[k] = L[i]
+	str r4, [r9, r2, lsl #2]
+	add r0, #1					//			i = i + 1
+	b f_merge_k_loop_end
+
+f_merge_Li_gt_Rj:
+//		if i <= n1 and j <= n2 and L[i] > R[j]
+	ldr r4, [sp, #16]			//			A[k] = R[j]
+	str	r9, [r4, r2, lsl #2]
+	add r1, #1					//			j = j + 1
+	b f_merge_k_loop_end
+
+f_merge_i_gt_n1:				// if i > n1
+	ldr r4, [r8, r1, lsl #2]	// A[k] = R[j]
+	ldr r9, [sp, #16]			// r9 points to A
+	str r4, [r9, r2, lsl #2]	// store r4 in A[k]
+	add r1, #1					// j = j + 1
+	b f_merge_k_loop_end
+
+f_merge_j_gt_n2:				// if j > n2
+	ldr r4, [r7, r0, lsl #2]	// A[k] = L[i]
+	ldr r9, [sp, #16]			// r9 points to A
+	str r4, [r9, r2, lsl #2]	// store r4 in A[k]
+	add r0, #1					// i = i + 1
+	// fall through to f_merge_k_loop_end
+
+f_merge_k_loop_end:
+	add r2, #1
+	cmp r2, r3
+	bne f_merge_k_loop
+
+f_merge_ret:
+	mov r0, r7			// Free buffer L
+	bl free
+	mov r0, r8			// Free buffer R
+	bl free
+
+	add sp, #20			// restore the sp
+	pop {r5-r8, pc}
+//--------------------------------------------------------------------------------------
+// Copy words from one buffer to another
+// r0 = dest
+// r1 = src
+// r2 = count
+//--------------------------------------------------------------------------------------
+f_copy_words:
+	ldr r3, [r1], #4
+	str r3, [r0], #4
+	subs r2, #1
+	bne f_copy_words
+	mov pc, lr
 //--------------------------------------------------------------------------------------
 util_format_buffer:
 	.string "9999999999"

@@ -4,8 +4,6 @@
 
 .global _start
 
-.extern heap_init
-.extern heap_alloc_buffer
 .extern scr_init
 .extern scr_init_frame
 .extern scr_set_colours
@@ -36,9 +34,9 @@ _start:
     //
     // Use the heap allocation routines to allocate a life_buffer
     //
-    bl heap_init
-    mov r0, #(SCREEN_X*SCREEN_Y*4)
-    bl heap_alloc_buffer
+    bl malloc_init
+    mov r0, #(SCREEN_X*SCREEN_Y)
+    bl malloc
     str r0, life_buffer_ptr
 
     bl scr_init
@@ -84,7 +82,7 @@ seed_loop:
 	mov r4, r0
 	pop {r0, r1, r2, r3}
 
-    tst r4, #1
+    tst r4, #3
     strne r3, [r0]
     streq r5, [r0]
 

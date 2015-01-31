@@ -4,7 +4,7 @@
 
 .global _start
 
-.equ NUM_INTS, 1024
+.equ NUM_INTS, 256
 
 .arm
 
@@ -62,9 +62,9 @@ _reset_:
 	//
 	// Create a buffer and set its values to random-ish data
 	//
-	bl heap_init
-	mov r0, #NUM_INTS<<2	// A number of words
-	bl heap_alloc_buffer	// Allocate some memory
+	bl malloc_init
+	mov r0, #NUM_INTS		// A number of words
+	bl malloc				// Allocate some memory
 	mov r4, r0				// Save the address for later
 	//
 	// Create 100 random numbers and store in the memory buffer

@@ -25,9 +25,8 @@ uart0_terminal:
 	//
 	// Initialise the heap and allocate a command line buffer
 	//
-	bl heap_init
 	mov r0, #TERM_MAX_CMDLINE
-	bl heap_alloc_buffer
+	bl malloc
 	str r0, term_cmd_line_ptr
 	//
 	// Mark it as empty

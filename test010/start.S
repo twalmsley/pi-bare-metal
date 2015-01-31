@@ -58,46 +58,143 @@ _reset_:
 
 	bl init_arm_timer
 	bl _enable_interrupts
+	bl uart0_init
 	//
-	// Use the gert_led functions to set the IO state for pins 18, 21, 22, 23, 24, and 25
-	// that should be connected to the hex darlington driver chip on the gertboard
+	// Test the malloc and free routines
 	//
-	// This one probably isn't going to become anything useful - it may just be a template for
-	// future work.
+	bl malloc_init
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
 	//
-	mov r0, #0b1111110
-	bl gert_init_leds
+	// Allocate 100 words and print the pointer value
+	//
+	mov r0, #100
+	bl malloc
+	mov r4, r0		// Save the buffer pointer
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
+	mov r0, r4			// Free the buffer
+	bl free
+	//
+	// Allocate 200 words and print the pointer value
+	//
+	mov r0, #200
+	bl malloc
+	mov r4, r0		// Save the buffer pointer
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
+	mov r0, r4			// Free the buffer
+	bl free
+	//
+	// Allocate 50 words and print the pointer value
+	//
+	mov r0, #50
+	bl malloc
+	mov r4, r0		// Save the buffer pointer
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
+	mov r0, r4			// Free the buffer
+	bl free
+	//
+	// Allocate 40 words and print the pointer value
+	//
+	mov r0, #40
+	bl malloc
+	mov r4, r0		// Save the buffer pointer
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
+	mov r0, r4			// Free the buffer
+	bl free
+	//
+	// Allocate 200 words and print the pointer value
+	//
+	mov r0, #200
+	bl malloc
+	mov r4, r0		// Save the buffer pointer
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
+	mov r0, r4			// Free the buffer
+	bl free
+	//
+	// Allocate 200 words and print the pointer value
+	//
+	mov r0, #200
+	bl malloc
+	mov r4, r0		// Save the buffer pointer
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
+	mov r0, r4			// Free the buffer
+	bl free
+	//
+	// Allocate 200 words and print the pointer value
+	//
+	mov r0, #200
+	bl malloc
+	mov r4, r0		// Save the buffer pointer
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
+	mov r0, r4			// Free the buffer
+	bl free
+	//
+	// Allocate 200 words and print the pointer value
+	//
+	mov r0, #200
+	bl malloc
+	mov r4, r0		// Save the buffer pointer
+	mov r1, #0
+	bl util_itoa
+	bl uart0_write_bytes
+	mov r0, #'\r'
+	bl uart0_write_byte
+	mov r0, #'\n'
+	bl uart0_write_byte
+	mov r0, r4			// Free the buffer
+	bl free
+	//
+	// Start the terminal
+	//
+	bl uart0_terminal
 spin_loop:
-	//
-	// Turn them all off
-	//
-	mov r4, #6
-main_led_off_loop:
-	mov r0, r4
-	bl gert_led_off
-	subs r4, #1
-	bne main_led_off_loop
-	//
-	// Wait a bit
-	//
-	mov r0, #(1<<24)
-	bl util_r0_delay
-	//
-	// Turn them all on
-	//
-	mov r4, #6
-main_led_on_loop:
-	mov r0, r4
-	bl gert_led_on
-	subs r4, #1
-	bne main_led_on_loop
-	//
-	// Wait a bit
-	//
-	mov r0, #(1<<24)
-	bl util_r0_delay
-
-
 	b spin_loop
 //------------------------------------------------------------------
 _enable_interrupts:
