@@ -60,9 +60,6 @@ _reset_:
 
 	bl _enable_interrupts
 	bl uart0_init
-	//
-	// Create a buffer and set its values to random-ish data
-	//
 	bl malloc_init
 	//
 	// Try the merge function
@@ -92,6 +89,9 @@ spin_loop:
 test1:
 	push {lr}
 
+	//
+	// Create a buffer and set its values to random-ish data
+	//
 	mov r0, #NUM_INTS		// A number of words
 	bl malloc				// Allocate some memory
 	mov r4, r0				// Save the address for later

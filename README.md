@@ -25,3 +25,7 @@ Now there is virtually none of the original code in here, just a few snippets ne
 . Test008 - A simple text terminal skeleton - gives a prompt and can display text on the HDMI and/or UART. Good for adding debug statements.
 
 . Test009 - Use SPI to set up the Gertboard DAC and ADC then constantly read values from the ADC.
+
+. Test010 - Tests the simple malloc and free routines.
+
+. Test011 - Exercises the merge sort function.
